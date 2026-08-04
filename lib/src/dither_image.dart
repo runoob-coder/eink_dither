@@ -41,51 +41,37 @@ enum DitherScanOrder {
   hilbert,
 }
 
-const _ditherKernels = [
-  [
+/// Error-diffusion dither kernels keyed by [DitherKernel].
+///
+/// Each kernel is a list of taps, where every tap is `[weight, offsetX,
+/// offsetY]`: the [weight] (fraction of the quantization error) is propagated
+/// to the neighbor at `(x + offsetX, y + offsetY)`.
+///
+/// The Bayer and blue-noise variants are not error-diffusion kernels and live
+/// in [_bayerMatrices] / [_blueNoiseMask] instead.
+const Map<DitherKernel, List<List<num>>> _errorDiffusionKernels = {
+  // Placeholder for [DitherKernel.none]; it is never actually used because
+  // [ditherImage] short-circuits before reaching the diffusion loop.
+  DitherKernel.none: [
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
-  ],
-  // False Floyd-Steinberg (Heckbert)
-  [
-    [3 / 8, 1, 0],
-    [3 / 8, 0, 1],
-    [2 / 8, 1, 1],
   ],
   // Floyd-Steinberg
-  [
+  DitherKernel.floydSteinberg: [
     [7 / 16, 1, 0],
     [3 / 16, -1, 1],
     [5 / 16, 0, 1],
     [1 / 16, 1, 1],
   ],
-  // Stucki
-  [
-    [8 / 42, 1, 0],
-    [4 / 42, 2, 0],
-    [2 / 42, -2, 1],
-    [4 / 42, -1, 1],
-    [8 / 42, 0, 1],
-    [4 / 42, 1, 1],
-    [2 / 42, 2, 1],
-    [1 / 42, -2, 2],
-    [2 / 42, -1, 2],
-    [4 / 42, 0, 2],
-    [2 / 42, 1, 2],
-    [1 / 42, 2, 2],
-  ],
-  // Atkinson:
-  [
-    [1 / 8, 1, 0],
-    [1 / 8, 2, 0],
-    [1 / 8, -1, 1],
-    [1 / 8, 0, 1],
-    [1 / 8, 1, 1],
-    [1 / 8, 0, 2],
+  // False Floyd-Steinberg (Heckbert)
+  DitherKernel.falseFloydSteinberg: [
+    [3 / 8, 1, 0],
+    [3 / 8, 0, 1],
+    [2 / 8, 1, 1],
   ],
   // Jarvis-Judice-Ninke
-  [
+  DitherKernel.jarvisJudiceNinke: [
     [7 / 48, 1, 0],
     [5 / 48, 2, 0],
     [3 / 48, -2, 1],
@@ -99,8 +85,23 @@ const _ditherKernels = [
     [3 / 48, 1, 2],
     [1 / 48, 2, 2],
   ],
+  // Stucki
+  DitherKernel.stucki: [
+    [8 / 42, 1, 0],
+    [4 / 42, 2, 0],
+    [2 / 42, -2, 1],
+    [4 / 42, -1, 1],
+    [8 / 42, 0, 1],
+    [4 / 42, 1, 1],
+    [2 / 42, 2, 1],
+    [1 / 42, -2, 2],
+    [2 / 42, -1, 2],
+    [4 / 42, 0, 2],
+    [2 / 42, 1, 2],
+    [1 / 42, 2, 2],
+  ],
   // Burkes
-  [
+  DitherKernel.burkes: [
     [8 / 32, 1, 0],
     [4 / 32, 2, 0],
     [2 / 32, -2, 1],
@@ -109,7 +110,16 @@ const _ditherKernels = [
     [4 / 32, 1, 1],
     [2 / 32, 2, 1],
   ],
-];
+  // Atkinson
+  DitherKernel.atkinson: [
+    [1 / 8, 1, 0],
+    [1 / 8, 2, 0],
+    [1 / 8, -1, 1],
+    [1 / 8, 0, 1],
+    [1 / 8, 1, 1],
+    [1 / 8, 0, 2],
+  ],
+};
 
 /// Ordered (Bayer) dither matrices with values normalized to [0, 1).
 const _bayerMatrices = <DitherKernel, List<List<double>>>{
@@ -320,7 +330,7 @@ img.Image ditherImage(
       : scanOrder;
 
   final q = quantizer;
-  final ds = _ditherKernels[kernel.index];
+  final ds = _errorDiffusionKernels[kernel]!;
   final height = image.height;
   final width = image.width;
 
