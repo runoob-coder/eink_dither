@@ -4,12 +4,12 @@ import 'package:image/image.dart' as img;
 /// The pattern to use for dithering
 enum DitherKernel {
   none,
-  falseFloydSteinberg,
   floydSteinberg,
-  stucki,
-  atkinson,
+  falseFloydSteinberg,
   jarvisJudiceNinke,
+  stucki,
   burkes,
+  atkinson,
   bayer2x2,
   bayer4x4,
   bayer8x8,

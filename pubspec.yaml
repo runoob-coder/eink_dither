@@ -6,6 +6,7 @@ repository: https://github.com/runoob-coder/eink_dither
 issue_tracker: https://github.com/runoob-coder/eink_dither/issues
 topics:
   - image
+  - error-diffusion-dithering
   - floyd–steinberg
   - heckbert
   - jarvis–judice–ninke
