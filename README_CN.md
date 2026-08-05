@@ -147,6 +147,8 @@ enum DitherKernel {
 | `zigzag`     | 对角锯齿扫描（JPEG 式排布）：沿反对角线 `x + y == d` 遍历，逐条对角线交替方向，柔化光栅扫描典型的横向"蠕虫纹理"。                |
 | `hilbert`    | Hilbert 空间填充曲线：像素按分形顺序访问，相邻像素在网格上紧邻，最大化空间局部性；在所有确定性扫描中方向性伪影抑制最佳，且近似随机游走误差扩散而不失确定性。 |
 
+![误差扩散算法遍历像素顺序](https://github.com/runoob-coder/eink_dither/raw/main/dither_scans.png)
+
 ## 🖼️ 算法效果示例
 
 以下预览均使用 `EInkPalette.spectra6`、`maxSize: 700` 生成。

@@ -154,6 +154,8 @@ on the ordered (Bayer / blue-noise) kernels.
 | `zigzag`     | Diagonal zigzag (JPEG-style) scan: visits pixels along anti-diagonals `x + y == d`, alternating each diagonal's direction, softening the horizontal worm patterns of raster scanning.                                                      |
 | `hilbert`    | Hilbert space-filling curve: consecutive pixels are adjacent on the grid, maximizing spatial locality; best reduction of directional artifacts among deterministic orders, approximating random-walk diffusion without losing determinism. |
 
+![DitherScanOrder](https://github.com/runoob-coder/eink_dither/raw/main/dither_scans.png)
+
 ## 🖼️ Algorithm Examples
 
 All previews below were generated with `EInkPalette.spectra6` at `maxSize: 700`.
