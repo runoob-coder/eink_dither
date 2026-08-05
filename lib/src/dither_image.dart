@@ -299,8 +299,10 @@ List<List<double>> _generateBlueNoiseMask(int size) {
 /// the space-filling [DitherScanOrder.hilbert] curve).
 /// It has no effect on the Bayer kernels.
 ///
-/// [bayerStrength] scales the dither offset and is only used for the Bayer
-/// kernels; it is ignored by the error-diffusion kernels.
+/// [strength] scales the dither offset and is only used for the ordered
+/// kernels ([DitherKernel.bayer2x2], [DitherKernel.bayer4x4],
+/// [DitherKernel.bayer8x8] and [DitherKernel.blueNoise]); it is ignored by
+/// the error-diffusion kernels.
 img.Image ditherImage(
   img.Image image, {
   img.Quantizer? quantizer,
@@ -311,7 +313,7 @@ img.Image ditherImage(
   )
   bool serpentine = false,
   DitherScanOrder scanOrder = DitherScanOrder.zigzag,
-  double bayerStrength = 1.0,
+  double strength = 1.0,
 }) {
   quantizer ??= img.NeuralQuantizer(image);
 
@@ -321,7 +323,7 @@ img.Image ditherImage(
 
   final orderedMatrix = _orderedDitherMatrix(kernel);
   if (orderedMatrix != null) {
-    return ditherImageOrdered(image, quantizer, orderedMatrix, bayerStrength);
+    return ditherImageOrdered(image, quantizer, orderedMatrix, strength);
   }
 
   final order = serpentine

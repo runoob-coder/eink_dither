@@ -51,7 +51,7 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
   EInkPalette _selectedPalette = .spectra6;
   DitherKernel _selectedKernel = .floydSteinberg;
   DitherScanOrder _selectedScanOrder = .serpentine;
-  double _intensity = 1.0;
+  double _strength = 1.0;
 
   // ---------- display-name helpers ----------
 
@@ -101,17 +101,17 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
   bool get _scanOrderVisible =>
       !_kernelsWithoutScanOrder.contains(_selectedKernel);
 
-  // Intensity (ordered-dither strength) only applies to the position-based
+  // Strength (ordered-dither strength) only applies to the position-based
   // kernels — Bayer matrices and blue noise. Error-diffusion kernels and
   // `none` ignore it, so the slider is hidden for those.
-  static const _kernelsWithIntensity = {
+  static const _kernelsWithStrength = {
     DitherKernel.bayer2x2,
     DitherKernel.bayer4x4,
     DitherKernel.bayer8x8,
     DitherKernel.blueNoise,
   };
 
-  bool get _intensityVisible => _kernelsWithIntensity.contains(_selectedKernel);
+  bool get _strengthVisible => _kernelsWithStrength.contains(_selectedKernel);
 
   List<Color> _paletteColors(EInkPalette p) =>
       p.colors.map((c) => Color.fromARGB(255, c.r, c.g, c.b)).toList();
@@ -174,7 +174,7 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
           palette: _selectedPalette,
           ditherKernel: _selectedKernel,
           scanOrder: _selectedScanOrder,
-          intensity: _intensity,
+          strength: _strength,
           maxSize: 800,
         );
 
@@ -461,28 +461,28 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
                 ),
             ],
           ),
-          if (_intensityVisible)
+          if (_strengthVisible)
             Row(
               children: [
                 const Icon(Icons.contrast, size: 20),
                 const SizedBox(width: 8),
                 Text(
-                  'Intensity',
+                  'Strength',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 Expanded(
                   child: Slider(
-                    value: _intensity,
+                    value: _strength,
                     min: 0.0,
                     max: 2.0,
                     divisions: 40,
-                    label: '${(_intensity * 100).round()}%',
-                    onChanged: (v) => setState(() => _intensity = v),
+                    label: '${(_strength * 100).round()}%',
+                    onChanged: (v) => setState(() => _strength = v),
                     onChangeEnd: (_) => _processImage(),
                   ),
                 ),
                 Text(
-                  '${(_intensity * 100).round()}%',
+                  '${(_strength * 100).round()}%',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ],

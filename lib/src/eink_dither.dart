@@ -154,7 +154,7 @@ class EInkImageProcessor {
     this.palette = EInkPalette.spectra6,
     this.ditherKernel = img.DitherKernel.floydSteinberg,
     this.scanOrder = DitherScanOrder.raster,
-    this.intensity = 1.0,
+    this.strength = 1.0,
     this.maxSize = 800,
   });
 
@@ -167,10 +167,10 @@ class EInkImageProcessor {
   /// Pixel visiting order used by the error-diffusion kernels.
   final img.DitherScanOrder scanOrder;
 
-  /// Dither intensity for the ordered kernels (Bayer / blue noise).
+  /// Dither strength for the ordered kernels (Bayer / blue noise).
   /// Scales the threshold offset; 1.0 is the standard strength. The
   /// error-diffusion kernels ignore this value.
-  final double intensity;
+  final double strength;
 
   /// Maximum size (limits the longest side).
   final int maxSize;
@@ -193,7 +193,7 @@ class EInkImageProcessor {
       quantizer: EInkPaletteQuantizer.of(palette),
       kernel: ditherKernel,
       scanOrder: scanOrder,
-      bayerStrength: intensity,
+      strength: strength,
     );
   }
 

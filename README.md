@@ -48,7 +48,7 @@ Future<void> main() async {
     palette: EInkPalette.spectra6,
     ditherKernel: DitherKernel.floydSteinberg,
     scanOrder: DitherScanOrder.serpentine,
-    intensity: 1.0,
+    strength: 1.0,
     maxSize: 700,
   );
 
@@ -111,7 +111,7 @@ same work inside a `compute` isolate so the UI never blocks.
 | `palette`      | `EInkPalette`     | `EInkPalette.spectra6`        | Target ink palette.                                              |
 | `ditherKernel` | `DitherKernel`    | `DitherKernel.floydSteinberg` | Dithering algorithm.                                             |
 | `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | Pixel-visit order (error-diffusion only).                        |
-| `intensity`    | `double`          | `1.0`                         | Dither strength for ordered kernels; ignored by error-diffusion. |
+| `strength`     | `double`          | `1.0`                         | Dither strength for ordered kernels; ignored by error-diffusion. |
 | `maxSize`      | `int`             | `800`                         | Longest edge is capped to this (proportional resize).            |
 
 ```dart
@@ -162,7 +162,7 @@ All previews below were generated with `EInkPalette.spectra6` at `maxSize: 700`.
 
 ### 🟦 Ordered dithering
 
-These kernels ignore `scanOrder`. `intensity` (threshold strength) applies to them only.
+These kernels ignore `scanOrder`. `strength` (threshold strength) applies to them only.
 
 | Algorithm             | Preview                                                                                            |
 |-----------------------|----------------------------------------------------------------------------------------------------|
@@ -209,7 +209,7 @@ final out = ditherImage(
 - **Repository**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
 - **Issue tracker**: [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
 - **Example app**: The `example/` directory contains a Flutter demo that lets you pick an image and
-  tweak palette, kernel, scan order, and intensity live.
+  tweak palette, kernel, scan order, and strength live.
 - **Contributions**: Pull requests and issues are welcome!
 
 ## 💛 Support
