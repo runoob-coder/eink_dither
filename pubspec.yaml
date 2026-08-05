@@ -5,9 +5,9 @@ homepage: https://runoob-coder.github.io/eink_dither/
 repository: https://github.com/runoob-coder/eink_dither
 issue_tracker: https://github.com/runoob-coder/eink_dither/issues
 topics:
-  - error-diffusion-dithering
+  - error-diffusion
   - floyd–steinberg
-  - jarvis–judice–ninke
+  - jarvisjudiceninke
   - stucki
   - atkinson
 
