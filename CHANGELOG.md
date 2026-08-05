@@ -6,6 +6,15 @@
   - `ditherImage` parameter `bayerStrength` → `strength`
   - Update call sites, e.g. `EInkImageProcessor(strength: 1.0)` and
     `ditherImage(image, strength: 1.0)`.
+- 💥 **Breaking change**: `ditherImageOrdered` now takes a `DitherKernel kernel`
+  instead of a raw `List<List<double>> matrix`. The threshold matrix is resolved
+  internally via `_orderedDitherMatrix`, so callers pass the kernel
+  (e.g. `ditherImageOrdered(image, quantizer, DitherKernel.bayer4x4, strength)`)
+  rather than the matrix itself. `ditherImageBayer` and `ditherImageBlueNoise`
+  continue to work unchanged.
+- ♻️ Refactored the ordered-dither branch detection in `ditherImage`: added a
+  lightweight `_isOrderedDither` helper so the branch test no longer fetches the
+  threshold matrix; the matrix is looked up only once, inside `ditherImageOrdered`.
 
 ## 1.0.1
 

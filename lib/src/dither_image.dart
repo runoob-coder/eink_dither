@@ -321,9 +321,8 @@ img.Image ditherImage(
     return quantizer.getIndexImage(image);
   }
 
-  final orderedMatrix = _orderedDitherMatrix(kernel);
-  if (orderedMatrix != null) {
-    return ditherImageOrdered(image, quantizer, orderedMatrix, strength);
+  if (_isOrderedDither(kernel)) {
+    return ditherImageOrdered(image, quantizer, kernel, strength);
   }
 
   final order = serpentine
@@ -462,14 +461,33 @@ List<List<double>>? _orderedDitherMatrix(DitherKernel kernel) {
   return null;
 }
 
+/// Returns `true` if [kernel] is an ordered-dither variant (a Bayer matrix or
+/// [DitherKernel.blueNoise]), without fetching the threshold matrix itself.
+bool _isOrderedDither(DitherKernel kernel) =>
+    _bayerMatrices.containsKey(kernel) || kernel == DitherKernel.blueNoise;
+
 /// Shared ordered-dither implementation for both Bayer and blue-noise masks.
+///
+/// [kernel] selects the ordered-dither pattern and must be one of the Bayer
+/// variants ([DitherKernel.bayer2x2], [DitherKernel.bayer4x4],
+/// [DitherKernel.bayer8x8]) or [DitherKernel.blueNoise]. Passing any other
+/// [DitherKernel] triggers an assertion failure. The threshold matrix is
+/// resolved internally via [_orderedDitherMatrix] from [kernel].
 img.Image ditherImageOrdered(
   img.Image image,
-  img.Quantizer quantizer,
-  List<List<double>> matrix,
+  img.Quantizer? quantizer,
+  DitherKernel kernel,
   double strength,
 ) {
-  final n = matrix.length;
+  final matrix = _orderedDitherMatrix(kernel);
+  assert(
+    matrix != null,
+    'kernel must be an ordered-dither variant: a Bayer matrix or blueNoise',
+  );
+
+  quantizer ??= img.NeuralQuantizer(image);
+
+  final n = matrix!.length;
   final height = image.height;
   final width = image.width;
   final palette = quantizer.palette;
@@ -517,17 +535,11 @@ img.Image ditherImageBayer(
   DitherKernel kernel = DitherKernel.bayer4x4,
   double strength = 1.0,
 ]) {
-  quantizer ??= img.NeuralQuantizer(image);
   assert(
     _bayerMatrices.containsKey(kernel),
     'kernel must be a Bayer variant: bayer2x2, bayer4x4 or bayer8x8',
   );
-  return ditherImageOrdered(
-    image,
-    quantizer,
-    _bayerMatrices[kernel]!,
-    strength,
-  );
+  return ditherImageOrdered(image, quantizer, kernel, strength);
 }
 
 /// Dither an image using a blue-noise threshold mask. Unlike Bayer matrices,
@@ -547,8 +559,7 @@ img.Image ditherImageBlueNoise(
   img.Quantizer? quantizer,
   double strength = 1.0,
 ]) {
-  quantizer ??= img.NeuralQuantizer(image);
-  return ditherImageOrdered(image, quantizer, _blueNoiseMask, strength);
+  return ditherImageOrdered(image, quantizer, DitherKernel.blueNoise, strength);
 }
 
 /// Converts a Hilbert curve index [d] to (x, y) coordinates for an [n]×[n]
