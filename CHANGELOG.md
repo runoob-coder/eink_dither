@@ -1,3 +1,7 @@
+## 1.0.1
+
+- Adjusted the image / badge links in the documentation.
+
 ## 1.0.0
 
 - **8 dithering kernels** — error-diffusion (Floyd–Steinberg, Stucki, Atkinson,

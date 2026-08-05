@@ -28,9 +28,9 @@ Language: [English](README.md) | 中文
 
 通过 pub.dev 安装 → [pub.dev/packages/eink_dither/install](https://pub-web.flutter-io.cn/packages/eink_dither/install)
 
-[在线演示](https://runoob-coder.github.io/eink_dither/) — 立即体验
-
 ## 🚀 快速开始
+
+[在线演示](https://runoob-coder.github.io/eink_dither/) — 立即体验
 
 ```dart
 import 'dart:typed_data';
@@ -155,26 +155,26 @@ enum DitherKernel {
 
 有序抖动算法忽略 `scanOrder` 参数；支持 `intensity`（阈值强度）调节。
 
-| 算法          | 预览                                            |
-|-------------|-----------------------------------------------|
-| `none`（无抖动） | <img src="result/none.png" width="200"/>      |
-| `bayer2x2`  | <img src="result/bayer2x2.png" width="200"/>  |
-| `bayer4x4`  | <img src="result/bayer4x4.png" width="200"/>  |
-| `bayer8x8`  | <img src="result/bayer8x8.png" width="200"/>  |
-| `blueNoise` | <img src="result/blueNoise.png" width="200"/> |
+| 算法          | 预览                                                                                                 |
+|-------------|----------------------------------------------------------------------------------------------------|
+| `none`（无抖动） | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/none.png" width="200"/>      |
+| `bayer2x2`  | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer2x2.png" width="200"/>  |
+| `bayer4x4`  | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer4x4.png" width="200"/>  |
+| `bayer8x8`  | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer8x8.png" width="200"/>  |
+| `blueNoise` | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/blueNoise.png" width="200"/> |
 
 ### 🌊 误差扩散抖动
 
 不同的 `算法 × 扫描顺序` 的组合产生不同的纹理效果。
 
-| 算法 ↓ / 扫描 →                         | Raster（光栅）                                                     | Serpentine（蛇形/往返）                                                  | Zigzag（对角锯齿）                                                   | Hilbert（希尔伯特曲线）                                                 |
-|-------------------------------------|----------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
-| **Floyd–Steinberg**                 | <img src="result/floydSteinberg_raster.png" width="200"/>      | <img src="result/floydSteinberg_serpentine.png" width="200"/>      | <img src="result/floydSteinberg_zigzag.png" width="200"/>      | <img src="result/floydSteinberg_hilbert.png" width="200"/>      |
-| **False Floyd–Steinberg（Heckbert）** | <img src="result/falseFloydSteinberg_raster.png" width="200"/> | <img src="result/falseFloydSteinberg_serpentine.png" width="200"/> | <img src="result/falseFloydSteinberg_zigzag.png" width="200"/> | <img src="result/falseFloydSteinberg_hilbert.png" width="200"/> |
-| **Stucki**                          | <img src="result/stucki_raster.png" width="200"/>              | <img src="result/stucki_serpentine.png" width="200"/>              | <img src="result/stucki_zigzag.png" width="200"/>              | <img src="result/stucki_hilbert.png" width="200"/>              |
-| **Atkinson**                        | <img src="result/atkinson_raster.png" width="200"/>            | <img src="result/atkinson_serpentine.png" width="200"/>            | <img src="result/atkinson_zigzag.png" width="200"/>            | <img src="result/atkinson_hilbert.png" width="200"/>            |
-| **Jarvis–Judice–Ninke**             | <img src="result/jarvisJudiceNinke_raster.png" width="200"/>   | <img src="result/jarvisJudiceNinke_serpentine.png" width="200"/>   | <img src="result/jarvisJudiceNinke_zigzag.png" width="200"/>   | <img src="result/jarvisJudiceNinke_hilbert.png" width="200"/>   |
-| **Burkes**                          | <img src="result/burkes_raster.png" width="200"/>              | <img src="result/burkes_serpentine.png" width="200"/>              | <img src="result/burkes_zigzag.png" width="200"/>              | <img src="result/burkes_hilbert.png" width="200"/>              |
+| 算法 ↓ / 扫描 →                         | Raster（光栅）                                                                                                          | Serpentine（蛇形/往返）                                                                                                       | Zigzag（对角锯齿）                                                                                                        | Hilbert（希尔伯特曲线）                                                                                                      |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Floyd–Steinberg**                 | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_raster.png" width="200"/>      | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_serpentine.png" width="200"/>      | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_zigzag.png" width="200"/>      | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_hilbert.png" width="200"/>      |
+| **False Floyd–Steinberg（Heckbert）** | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_raster.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_serpentine.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_zigzag.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_hilbert.png" width="200"/> |
+| **Stucki**                          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_hilbert.png" width="200"/>              |
+| **Atkinson**                        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_raster.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_serpentine.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_zigzag.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_hilbert.png" width="200"/>            |
+| **Jarvis–Judice–Ninke**             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_raster.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_serpentine.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_zigzag.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_hilbert.png" width="200"/>   |
+| **Burkes**                          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_hilbert.png" width="200"/>              |
 
 ## 🔧 底层 API
 

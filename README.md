@@ -31,9 +31,9 @@ Language: English | [中文](https://github.com/runoob-coder/eink_dither/blob/ma
 
 Install via pub.dev → [pub.dev/packages/eink_dither/install](https://pub.dev/packages/eink_dither/install)
 
-[Live Demo](https://runoob-coder.github.io/eink_dither/) — try it out online
-
 ## 🚀 Quick Start
+
+[Live Demo](https://runoob-coder.github.io/eink_dither/) — try it out online
 
 ```dart
 import 'dart:typed_data';
@@ -162,26 +162,26 @@ All previews below were generated with `EInkPalette.spectra6` at `maxSize: 700`.
 
 These kernels ignore `scanOrder`. `intensity` (threshold strength) applies to them only.
 
-| Algorithm             | Preview                                       |
-|-----------------------|-----------------------------------------------|
-| `none` (no dithering) | <img src="result/none.png" width="200"/>      |
-| `bayer2x2`            | <img src="result/bayer2x2.png" width="200"/>  |
-| `bayer4x4`            | <img src="result/bayer4x4.png" width="200"/>  |
-| `bayer8x8`            | <img src="result/bayer8x8.png" width="200"/>  |
-| `blueNoise`           | <img src="result/blueNoise.png" width="200"/> |
+| Algorithm             | Preview                                                                                            |
+|-----------------------|----------------------------------------------------------------------------------------------------|
+| `none` (no dithering) | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/none.png" width="200"/>      |
+| `bayer2x2`            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer2x2.png" width="200"/>  |
+| `bayer4x4`            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer4x4.png" width="200"/>  |
+| `bayer8x8`            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer8x8.png" width="200"/>  |
+| `blueNoise`           | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/blueNoise.png" width="200"/> |
 
 ### 🌊 Error-diffusion dithering
 
 The combination `kernel × scanOrder` produces a distinct texture.
 
-| Kernel ↓ / Scan →                    | Raster                                                         | Serpentine                                                         | Zigzag                                                         | Hilbert                                                         |
-|--------------------------------------|----------------------------------------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
-| **Floyd–Steinberg**                  | <img src="result/floydSteinberg_raster.png" width="200"/>      | <img src="result/floydSteinberg_serpentine.png" width="200"/>      | <img src="result/floydSteinberg_zigzag.png" width="200"/>      | <img src="result/floydSteinberg_hilbert.png" width="200"/>      |
-| **False Floyd–Steinberg (Heckbert)** | <img src="result/falseFloydSteinberg_raster.png" width="200"/> | <img src="result/falseFloydSteinberg_serpentine.png" width="200"/> | <img src="result/falseFloydSteinberg_zigzag.png" width="200"/> | <img src="result/falseFloydSteinberg_hilbert.png" width="200"/> |
-| **Stucki**                           | <img src="result/stucki_raster.png" width="200"/>              | <img src="result/stucki_serpentine.png" width="200"/>              | <img src="result/stucki_zigzag.png" width="200"/>              | <img src="result/stucki_hilbert.png" width="200"/>              |
-| **Atkinson**                         | <img src="result/atkinson_raster.png" width="200"/>            | <img src="result/atkinson_serpentine.png" width="200"/>            | <img src="result/atkinson_zigzag.png" width="200"/>            | <img src="result/atkinson_hilbert.png" width="200"/>            |
-| **Jarvis–Judice–Ninke**              | <img src="result/jarvisJudiceNinke_raster.png" width="200"/>   | <img src="result/jarvisJudiceNinke_serpentine.png" width="200"/>   | <img src="result/jarvisJudiceNinke_zigzag.png" width="200"/>   | <img src="result/jarvisJudiceNinke_hilbert.png" width="200"/>   |
-| **Burkes**                           | <img src="result/burkes_raster.png" width="200"/>              | <img src="result/burkes_serpentine.png" width="200"/>              | <img src="result/burkes_zigzag.png" width="200"/>              | <img src="result/burkes_hilbert.png" width="200"/>              |
+| Kernel ↓ / Scan →                    | Raster                                                                                                              | Serpentine                                                                                                              | Zigzag                                                                                                              | Hilbert                                                                                                              |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Floyd–Steinberg**                  | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_raster.png" width="200"/>      | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_serpentine.png" width="200"/>      | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_zigzag.png" width="200"/>      | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/floydSteinberg_hilbert.png" width="200"/>      |
+| **False Floyd–Steinberg (Heckbert)** | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_raster.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_serpentine.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_zigzag.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/falseFloydSteinberg_hilbert.png" width="200"/> |
+| **Stucki**                           | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/stucki_hilbert.png" width="200"/>              |
+| **Atkinson**                         | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_raster.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_serpentine.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_zigzag.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_hilbert.png" width="200"/>            |
+| **Jarvis–Judice–Ninke**              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_raster.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_serpentine.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_zigzag.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_hilbert.png" width="200"/>   |
+| **Burkes**                           | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_hilbert.png" width="200"/>              |
 
 ## 🔧 Low-level API
 
@@ -229,13 +229,15 @@ It only takes a few seconds and helps other Flutter developers discover the libr
 This package stands on the shoulders of the researchers who pioneered digital dithering and
 halftoning. We gratefully acknowledge their foundational contributions:
 
-- **Floyd–Steinberg** — Robert W. Floyd & Louis Steinberg (1976), the classic error-diffusion kernel.
+- **Floyd–Steinberg** — Robert W. Floyd & Louis Steinberg (1976), the classic error-diffusion
+  kernel.
 - **False Floyd–Steinberg (Heckbert)** — Paul Heckbert, introduced in his 1982 SIGGRAPH course notes
   *Color Image Quantization for Frame Buffer Display*.
 - **Jarvis–Judice–Ninke** — J. F. Jarvis, C. N. Judice & W. H. Ninke (1976), Bell Labs.
 - **Stucki** — Peter Stucki (1981), an optimized refinement of the Jarvis kernel at IBM.
 - **Burkes** — Daniel Burkes, a simplified 7-pixel variant of the Jarvis–Judice–Ninke kernel.
 - **Atkinson** — Bill Atkinson, created for MacPaint / HyperCard on early Macintosh systems.
-- **Bayer (ordered dithering)** — Bryce E. Bayer (1973), best known for the Bayer color filter array.
+- **Bayer (ordered dithering)** — Bryce E. Bayer (1973), best known for the Bayer color filter
+  array.
 - **Blue noise / void-and-cluster** — Robert A. Ulichney (1987, 1993), *Digital Halftoning*, who
   formalized blue-noise dithering and the void-and-cluster mask generation method.
