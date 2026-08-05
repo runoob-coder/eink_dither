@@ -6,7 +6,7 @@ repository: https://github.com/runoob-coder/eink_dither
 issue_tracker: https://github.com/runoob-coder/eink_dither/issues
 topics:
   - error-diffusion
-  - floyd–steinberg
+  - floyd-steinberg
   - jarvisjudiceninke
   - stucki
   - atkinson
