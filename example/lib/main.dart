@@ -127,11 +127,11 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
 
   // ---------- actions ----------
 
-  /// Load the bundled sample image (assets/design.png) for quick debugging
+  /// Load the bundled sample image for quick debugging
   /// without needing to pick from the gallery or camera.
   Future<void> _loadDefaultImage() async {
     try {
-      final data = await rootBundle.load('assets/design.png');
+      final data = await rootBundle.load('../assets/lenna.png');
       if (!mounted) return;
       setState(() {
         _originalBytes = data.buffer.asUint8List();
