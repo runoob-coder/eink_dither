@@ -299,7 +299,7 @@ List<List<double>> _generateBlueNoiseMask(int size) {
 /// the space-filling [DitherScanOrder.hilbert] curve).
 /// It has no effect on the Bayer kernels.
 ///
-/// [strength] scales the dither offset and is only used for the ordered
+/// [intensity] scales the dither offset and is only used for the ordered
 /// kernels ([DitherKernel.bayer2x2], [DitherKernel.bayer4x4],
 /// [DitherKernel.bayer8x8] and [DitherKernel.blueNoise]); it is ignored by
 /// the error-diffusion kernels.
@@ -313,7 +313,7 @@ img.Image ditherImage(
   )
   bool serpentine = false,
   DitherScanOrder scanOrder = DitherScanOrder.zigzag,
-  double strength = 1.0,
+  double intensity = 1.0,
 }) {
   quantizer ??= img.NeuralQuantizer(image);
 
@@ -322,7 +322,7 @@ img.Image ditherImage(
   }
 
   if (_isOrderedDither(kernel)) {
-    return ditherImageOrdered(image, quantizer, kernel, strength);
+    return ditherImageOrdered(image, quantizer, kernel, intensity);
   }
 
   final order = serpentine
@@ -477,7 +477,7 @@ img.Image ditherImageOrdered(
   img.Image image,
   img.Quantizer? quantizer,
   DitherKernel kernel,
-  double strength,
+  double intensity,
 ) {
   final matrix = _orderedDitherMatrix(kernel);
   assert(
@@ -504,7 +504,7 @@ img.Image ditherImageOrdered(
       final pc = image.getPixel(x, y);
       // Centered threshold in the range [-0.5, 0.5).
       final t = row[x % n] - 0.5;
-      final d = t * 255 * strength;
+      final d = t * 255 * intensity;
       final r = _clampChannel(pc[0] + d);
       final g = _clampChannel(pc[1] + d);
       final b = _clampChannel(pc[2] + d);
@@ -527,19 +527,19 @@ img.Image ditherImageOrdered(
 /// [quantizer] is the color reducer used to map each pixel to the palette;
 /// if `null` (the default) a [NeuralQuantizer] is built from [image].
 ///
-/// [strength] scales the dither offset (defaults to 1.0 for the classic
+/// [intensity] scales the dither offset (defaults to 1.0 for the classic
 /// full-range Bayer look; smaller values give subtler banding reduction).
 img.Image ditherImageBayer(
   img.Image image, [
   img.Quantizer? quantizer,
   DitherKernel kernel = DitherKernel.bayer4x4,
-  double strength = 1.0,
+  double intensity = 1.0,
 ]) {
   assert(
     _bayerMatrices.containsKey(kernel),
     'kernel must be a Bayer variant: bayer2x2, bayer4x4 or bayer8x8',
   );
-  return ditherImageOrdered(image, quantizer, kernel, strength);
+  return ditherImageOrdered(image, quantizer, kernel, intensity);
 }
 
 /// Dither an image using a blue-noise threshold mask. Unlike Bayer matrices,
@@ -552,14 +552,14 @@ img.Image ditherImageBayer(
 /// [quantizer] is the color reducer used to map each pixel to the palette;
 /// if `null` (the default) a [NeuralQuantizer] is built from [image].
 ///
-/// [strength] scales the dither offset (defaults to 1.0 for the full-range
+/// [intensity] scales the dither offset (defaults to 1.0 for the full-range
 /// look; smaller values give subtler banding reduction).
 img.Image ditherImageBlueNoise(
   img.Image image, [
   img.Quantizer? quantizer,
-  double strength = 1.0,
+  double intensity = 1.0,
 ]) {
-  return ditherImageOrdered(image, quantizer, DitherKernel.blueNoise, strength);
+  return ditherImageOrdered(image, quantizer, DitherKernel.blueNoise, intensity);
 }
 
 /// Converts a Hilbert curve index [d] to (x, y) coordinates for an [n]×[n]

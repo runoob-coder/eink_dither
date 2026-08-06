@@ -45,7 +45,7 @@ Future<void> main() async {
     palette: EInkPalette.spectra6,
     ditherKernel: DitherKernel.floydSteinberg,
     scanOrder: DitherScanOrder.serpentine,
-    strength: 1.0,
+    intensity: 1.0,
     maxSize: 700,
   );
 
@@ -106,7 +106,7 @@ final q2 = EInkPaletteQuantizer.of(EInkPalette.spectra6);
 | `palette`      | `EInkPalette`     | `EInkPalette.spectra6`        | 目标墨水屏颜色调色板。           |
 | `ditherKernel` | `DitherKernel`    | `DitherKernel.floydSteinberg` | 抖动算法。                 |
 | `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | 像素遍历顺序（仅误差扩散类生效）。     |
-| `strength`     | `double`          | `1.0`                         | 有序算法的抖动强度；误差扩散算法忽略此值。 |
+| `intensity`    | `double`          | `1.0`                         | 有序算法的抖动强度；误差扩散算法忽略此值。 |
 | `maxSize`      | `int`             | `800`                         | 最长边被限制为该值（等比缩放）。      |
 
 ```dart
@@ -155,7 +155,7 @@ enum DitherKernel {
 
 ### 🟦 有序抖动
 
-有序抖动算法忽略 `scanOrder` 参数；支持 `strength`（阈值强度）调节。
+有序抖动算法忽略 `scanOrder` 参数；支持 `intensity`（阈值强度）调节。
 
 | 算法          | 预览                                                                                                 |
 |-------------|----------------------------------------------------------------------------------------------------|

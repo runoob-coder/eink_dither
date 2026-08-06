@@ -1,6 +1,6 @@
 name: eink_dither
 description: "Apply dithering algorithms to quantize full-color images for limited-color displays like E-Ink, Thermal Printers, and Dot-Matrix Screens."
-version: 2.0.0
+version: 2.1.0
 homepage: https://runoob-coder.github.io/eink_dither/
 repository: https://github.com/runoob-coder/eink_dither
 issue_tracker: https://github.com/runoob-coder/eink_dither/issues

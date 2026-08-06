@@ -1,3 +1,13 @@
+## 2.1.0
+
+- 💥 **Breaking change**: renamed the ordered-dither `strength` parameter back to
+  `intensity` for a more fitting, consistent name across the dithering API:
+  - `EInkImageProcessor.strength` → `intensity`
+  - `ditherImage`, `ditherImageOrdered`, `ditherImageBayer`, `ditherImageBlueNoise`
+    parameter `strength` → `intensity`
+  - Update call sites, e.g. `EInkImageProcessor(intensity: 1.0)` and
+    `ditherImage(image, intensity: 1.0)`.
+
 ## 2.0.0
 
 - 💥 **Breaking change**: renamed the ordered-dither strength parameter for a consistent
