@@ -164,7 +164,7 @@ Sierra 系列（由 Frankie Sierra 提出）随着核尺寸缩小，以质量换
 
 ## 🖼️ 算法效果示例
 
-以下预览均使用 `EInkPalette.spectra6`、`maxSize: 700` 生成。
+以下预览均使用 `EInkPalette.spectra6` 生成。
 
 ### 🟦 有序抖动
 

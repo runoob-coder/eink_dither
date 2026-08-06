@@ -171,7 +171,7 @@ on the ordered (Bayer / blue-noise) kernels.
 
 ## 🖼️ Algorithm Examples
 
-All previews below were generated with `EInkPalette.spectra6` at `maxSize: 700`.
+All previews below were generated with `EInkPalette.spectra6`.
 
 ### 🟦 Ordered dithering
 

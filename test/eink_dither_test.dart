@@ -47,7 +47,7 @@ void main() {
           final processor = EInkImageProcessor(
             palette: EInkPalette.spectra6,
             ditherKernel: kernel,
-            maxSize: 700,
+            maxSize: 512,
           );
 
           final processed = processor.process(originalBytes);
@@ -64,7 +64,7 @@ void main() {
               palette: EInkPalette.spectra6,
               ditherKernel: kernel,
               scanOrder: order,
-              maxSize: 700,
+              maxSize: 512,
             );
 
             final processed = processor.process(originalBytes);
