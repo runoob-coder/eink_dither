@@ -1,3 +1,7 @@
+## 2.2.1
+
+- 📝 **Docs**: improved the documentation.
+
 ## 2.2.0
 
 - ✨ **New feature**: added the Sierra family of error-diffusion kernels (Frankie Sierra):
