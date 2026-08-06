@@ -1,3 +1,10 @@
+## 2.2.0
+
+- ✨ **New feature**: added the Sierra family of error-diffusion kernels (Frankie Sierra):
+    - `DitherKernel.sierra3` — Sierra / Sierra-3, 10 neighbours, divisor 32.
+    - `DitherKernel.sierra2` — Two-Row Sierra / Sierra-2, 7 neighbours, divisor 16.
+    - `DitherKernel.sierraLite` — Sierra Lite / Sierra-2-4-A, 3 neighbours, divisor 4.
+
 ## 2.1.0
 
 - 💥 **Breaking change**: renamed the ordered-dither `strength` parameter back to

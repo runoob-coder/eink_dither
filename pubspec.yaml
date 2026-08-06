@@ -1,6 +1,6 @@
 name: eink_dither
 description: "Apply dithering algorithms to quantize full-color images for limited-color displays like E-Ink, Thermal Printers, and Dot-Matrix Screens."
-version: 2.1.0
+version: 2.2.0
 homepage: https://runoob-coder.github.io/eink_dither/
 repository: https://github.com/runoob-coder/eink_dither
 issue_tracker: https://github.com/runoob-coder/eink_dither/issues
@@ -78,6 +78,33 @@ screenshots:
     path: result/burkes_zigzag.png
   - description: "Burkes — Hilbert scan"
     path: result/burkes_hilbert.png
+
+  - description: "Sierra (Sierra-3) — raster scan"
+    path: result/sierra3_raster.png
+  - description: "Sierra (Sierra-3) — serpentine scan"
+    path: result/sierra3_serpentine.png
+  - description: "Sierra (Sierra-3) — zigzag scan"
+    path: result/sierra3_zigzag.png
+  - description: "Sierra (Sierra-3) — Hilbert scan"
+    path: result/sierra3_hilbert.png
+
+  - description: "Two-Row Sierra (Sierra-2) — raster scan"
+    path: result/sierra2_raster.png
+  - description: "Two-Row Sierra (Sierra-2) — serpentine scan"
+    path: result/sierra2_serpentine.png
+  - description: "Two-Row Sierra (Sierra-2) — zigzag scan"
+    path: result/sierra2_zigzag.png
+  - description: "Two-Row Sierra (Sierra-2) — Hilbert scan"
+    path: result/sierra2_hilbert.png
+
+  - description: "Sierra Lite (Sierra-2-4-A) — raster scan"
+    path: result/sierraLite_raster.png
+  - description: "Sierra Lite (Sierra-2-4-A) — serpentine scan"
+    path: result/sierraLite_serpentine.png
+  - description: "Sierra Lite (Sierra-2-4-A) — zigzag scan"
+    path: result/sierraLite_zigzag.png
+  - description: "Sierra Lite (Sierra-2-4-A) — Hilbert scan"
+    path: result/sierraLite_hilbert.png
 
 include:
   - pubspec.yaml

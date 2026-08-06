@@ -14,9 +14,9 @@ Language: [English](README.md) | 中文
 
 ## ✨ 特性
 
-- **8 种抖动算法**——误差扩散类（Floyd–Steinberg、Stucki、Atkinson、
-  Jarvis–Judice–Ninke、Burkes、False Floyd–Steinberg（Heckbert））、有序类（拜耳矩阵 Bayer 2×2 / 4×4 / 8×8、
-  蓝噪声），以及无抖动（none）。
+- **13 种抖动算法**——误差扩散类（Floyd–Steinberg、Stucki、Atkinson、
+  Jarvis–Judice–Ninke、Burkes、False Floyd–Steinberg（Heckbert）、Sierra-3、Two-Row Sierra、
+  Sierra Lite（Sierra-2-4-A））、有序类（拜耳矩阵 Bayer 2×2 / 4×4 / 8×8、蓝噪声），以及无抖动（none）。
 - **4 种扫描顺序（scan order）**——用于误差扩散算法（raster、serpentine、zigzag、
   Hilbert 空间填充曲线）。
 - **8 种墨水屏调色板**——从纯黑白到 7 色（Gallery 7）以及 16 级灰度（Carta 16）。
@@ -30,7 +30,7 @@ Language: [English](README.md) | 中文
 
 ## 🚀 快速开始
 
-[在线演示](https://runoob-coder.github.io/eink_dither/) — 立即体验
+[在线演示 — 立即体验](https://runoob-coder.github.io/eink_dither/)
 
 ```dart
 import 'dart:typed_data';
@@ -131,12 +131,23 @@ enum DitherKernel {
   atkinson,
   jarvisJudiceNinke,
   burkes,
+  sierra3,
+  sierra2,
+  sierraLite,
   bayer2x2,
   bayer4x4,
   bayer8x8,
   blueNoise,
 }
 ```
+
+Sierra 系列（由 Frankie Sierra 提出）随着核尺寸缩小，以质量换取速度：
+
+| 算法           | 别名              | 扩散邻居数 | 除数 | 说明                                 |
+|--------------|-----------------|:-----:|:--:|------------------------------------|
+| `sierra3`    | Sierra、Sierra-3 |  10   | 32 | 三行卷积核，质量接近 Jarvis，但速度明显更快。         |
+| `sierra2`    | Two-Row Sierra  |   7   | 16 | 两行卷积核，质量与速度的良好折中。                  |
+| `sierraLite` | Sierra-2-4-A    |   3   | 4  | 最小的变体，速度最快；颗粒感略强于 Floyd–Steinberg。 |
 
 ### 🔀 `DitherScanOrder`
 
@@ -179,6 +190,9 @@ enum DitherKernel {
 | **Atkinson**                        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_raster.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_serpentine.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_zigzag.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_hilbert.png" width="200"/>            |
 | **Jarvis–Judice–Ninke**             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_raster.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_serpentine.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_zigzag.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_hilbert.png" width="200"/>   |
 | **Burkes**                          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_hilbert.png" width="200"/>              |
+| **Sierra（Sierra-3）**                | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_hilbert.png" width="200"/>             |
+| **Two-Row Sierra（Sierra-2）**        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_hilbert.png" width="200"/>             |
+| **Sierra Lite（Sierra-2-4-A）**       | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_raster.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_serpentine.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_zigzag.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_hilbert.png" width="200"/>          |
 
 ## 🔧 底层 API
 
@@ -232,6 +246,8 @@ final out = ditherImage(
 - **Stucki** —— Peter Stucki（1981），在 IBM 对 Jarvis 算法的优化改进。
 - **Burkes** —— Daniel Burkes，Jarvis–Judice–Ninke 算法的简化 7 像素变体。
 - **Atkinson** —— Bill Atkinson，为早期 Macintosh 的 MacPaint / HyperCard 所创。
+- **Sierra（Sierra-3）、Two-Row Sierra（Sierra-2）与 Sierra Lite（Sierra-2-4-A）** —— Frankie Sierra
+  （1989–1990），一组逐级缩小的卷积核，在质量与速度之间提供不同取舍。
 - **Bayer（有序抖动）** —— Bryce E. Bayer（1973），亦以拜耳色彩滤波阵列闻名。
 - **蓝噪声 / void-and-cluster** —— Robert A. Ulichney（1987、1993），*Digital Halftoning*，
   确立了蓝噪声抖动及 void-and-cluster 掩码生成方法。

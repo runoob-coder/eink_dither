@@ -7,11 +7,11 @@ import 'package:eink_dither/src/eink_dither.dart';
 import 'package:eink_dither/src/dither_image.dart';
 
 void main() {
-  final assetPath = 'assets/design.PNG';
+  final assetPath = 'assets/lenna.png';
   final outputDir = Directory('result');
 
   test(
-    'process design.png with all dither algorithms and scan orders',
+    'process test img with all dither algorithms and scan orders',
     () async {
       // Ensure output directory exists, clearing any existing images
       if (outputDir.existsSync()) {

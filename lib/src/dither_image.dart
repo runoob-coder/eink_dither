@@ -10,6 +10,9 @@ enum DitherKernel {
   stucki,
   burkes,
   atkinson,
+  sierra3,
+  sierra2,
+  sierraLite,
   bayer2x2,
   bayer4x4,
   bayer8x8,
@@ -118,6 +121,35 @@ const Map<DitherKernel, List<List<num>>> _errorDiffusionKernels = {
     [1 / 8, 0, 1],
     [1 / 8, 1, 1],
     [1 / 8, 0, 2],
+  ],
+  // Sierra (Sierra-3), Frankie Sierra 1989
+  DitherKernel.sierra3: [
+    [5 / 32, 1, 0],
+    [3 / 32, 2, 0],
+    [2 / 32, -2, 1],
+    [4 / 32, -1, 1],
+    [5 / 32, 0, 1],
+    [4 / 32, 1, 1],
+    [2 / 32, 2, 1],
+    [2 / 32, -1, 2],
+    [3 / 32, 0, 2],
+    [2 / 32, 1, 2],
+  ],
+  // Two-Row Sierra (Sierra-2)
+  DitherKernel.sierra2: [
+    [4 / 16, 1, 0],
+    [3 / 16, 2, 0],
+    [1 / 16, -2, 1],
+    [2 / 16, -1, 1],
+    [3 / 16, 0, 1],
+    [2 / 16, 1, 1],
+    [1 / 16, 2, 1],
+  ],
+  // Sierra Lite (Sierra-2-4-A)
+  DitherKernel.sierraLite: [
+    [2 / 4, 1, 0],
+    [1 / 4, -1, 1],
+    [1 / 4, 0, 1],
   ],
 };
 

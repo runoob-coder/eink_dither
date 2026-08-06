@@ -15,9 +15,9 @@ Language: English | [中文](https://github.com/runoob-coder/eink_dither/blob/ma
 
 ## ✨ Features
 
-- **8 dithering kernels** — error-diffusion (Floyd–Steinberg, Stucki, Atkinson,
-  Jarvis–Judice–Ninke, Burkes, False Floyd–Steinberg (Heckbert)), ordered (Bayer 2×2/4×4/8×8,
-  Blue Noise), and none (no dithering).
+- **13 dithering kernels** — error-diffusion (Floyd–Steinberg, Stucki, Atkinson,
+  Jarvis–Judice–Ninke, Burkes, False Floyd–Steinberg (Heckbert), Sierra-3, Two-Row Sierra,
+  Sierra Lite (Sierra-2-4-A)), ordered (Bayer 2×2/4×4/8×8, Blue Noise), and none (no dithering).
 - **4 scan orders** for error-diffusion kernels (raster, serpentine, zigzag, Hilbert
   space-filling curve).
 - **8 E-Ink palettes** — from pure black/white up to 7-color (Gallery 7) and 16-level
@@ -33,7 +33,7 @@ Install via pub.dev → [pub.dev/packages/eink_dither/install](https://pub.dev/p
 
 ## 🚀 Quick Start
 
-[Live Demo](https://runoob-coder.github.io/eink_dither/) — try it out online
+[Live Demo — try it out online](https://runoob-coder.github.io/eink_dither/)
 
 ```dart
 import 'dart:typed_data';
@@ -137,12 +137,23 @@ enum DitherKernel {
   atkinson,
   jarvisJudiceNinke,
   burkes,
+  sierra3,
+  sierra2,
+  sierraLite,
   bayer2x2,
   bayer4x4,
   bayer8x8,
   blueNoise,
 }
 ```
+
+The Sierra family (Frankie Sierra) trades quality for speed as the kernel shrinks:
+
+| Kernel       | Also known as    | Neighbours | Divisor | Notes                                                              |
+|--------------|------------------|:----------:|:-------:|--------------------------------------------------------------------|
+| `sierra3`    | Sierra, Sierra-3 |     10     |   32    | Three-row kernel, close to Jarvis quality but noticeably faster.   |
+| `sierra2`    | Two-Row Sierra   |     7      |   16    | Two-row kernel, a good quality/speed compromise.                   |
+| `sierraLite` | Sierra-2-4-A     |     3      |    4    | Smallest variant, fastest; slightly grainier than Floyd–Steinberg. |
 
 ### 🔀 `DitherScanOrder`
 
@@ -187,6 +198,9 @@ The combination `kernel × scanOrder` produces a distinct texture.
 | **Atkinson**                         | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_raster.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_serpentine.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_zigzag.png" width="200"/>            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/atkinson_hilbert.png" width="200"/>            |
 | **Jarvis–Judice–Ninke**              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_raster.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_serpentine.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_zigzag.png" width="200"/>   | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/jarvisJudiceNinke_hilbert.png" width="200"/>   |
 | **Burkes**                           | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_hilbert.png" width="200"/>              |
+| **Sierra (Sierra-3)**                | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_hilbert.png" width="200"/>             |
+| **Two-Row Sierra (Sierra-2)**        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_hilbert.png" width="200"/>             |
+| **Sierra Lite (Sierra-2-4-A)**       | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_raster.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_serpentine.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_zigzag.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_hilbert.png" width="200"/>          |
 
 ## 🔧 Low-level API
 
@@ -243,6 +257,8 @@ halftoning. We gratefully acknowledge their foundational contributions:
 - **Stucki** — Peter Stucki (1981), an optimized refinement of the Jarvis kernel at IBM.
 - **Burkes** — Daniel Burkes, a simplified 7-pixel variant of the Jarvis–Judice–Ninke kernel.
 - **Atkinson** — Bill Atkinson, created for MacPaint / HyperCard on early Macintosh systems.
+- **Sierra (Sierra-3), Two-Row Sierra (Sierra-2) and Sierra Lite (Sierra-2-4-A)** — Frankie Sierra
+  (1989–1990), a family of progressively smaller kernels balancing quality against speed.
 - **Bayer (ordered dithering)** — Bryce E. Bayer (1973), best known for the Bayer color filter
   array.
 - **Blue noise / void-and-cluster** — Robert A. Ulichney (1987, 1993), *Digital Halftoning*, who
