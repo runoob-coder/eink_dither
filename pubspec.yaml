@@ -13,8 +13,6 @@ topics:
 
 screenshots:
   # Ordered dithering
-  - description: "No dithering — plain quantization to the palette"
-    path: result/none.png
   - description: "Ordered dithering — Bayer 2×2 matrix"
     path: result/bayer2x2.png
   - description: "Ordered dithering — Bayer 4×4 matrix"
@@ -105,6 +103,10 @@ screenshots:
     path: result/sierraLite_zigzag.png
   - description: "Sierra Lite (Sierra-2-4-A) — Hilbert scan"
     path: result/sierraLite_hilbert.png
+
+  # None
+  - description: "No dithering — plain quantization to the palette"
+    path: result/none.png
 
 include:
   - pubspec.yaml
