@@ -178,13 +178,9 @@ All previews below were generated with `EInkPalette.spectra6` at `maxSize: 700`.
 These kernels ignore `scanOrder`. `intensity` (threshold intensity) and `patternSize`
 (threshold-cell scale) apply to them only.
 
-| Algorithm             | Preview                                                                                            |
-|-----------------------|----------------------------------------------------------------------------------------------------|
-| `none` (no dithering) | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/none.png" width="200"/>      |
-| `bayer2x2`            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer2x2.png" width="200"/>  |
-| `bayer4x4`            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer4x4.png" width="200"/>  |
-| `bayer8x8`            | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer8x8.png" width="200"/>  |
-| `blueNoise`           | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/blueNoise.png" width="200"/> |
+| `none` (no dithering)                                                                         | `bayer2x2`                                                                                        | `bayer4x4`                                                                                        | `bayer8x8`                                                                                        | `blueNoise`                                                                                        |
+|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/none.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer2x2.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer4x4.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer8x8.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/blueNoise.png" width="200"/> |
 
 ### 🌊 Error-diffusion dithering
 

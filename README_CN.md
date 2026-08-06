@@ -170,13 +170,9 @@ Sierra 系列（由 Frankie Sierra 提出）随着核尺寸缩小，以质量换
 
 有序抖动算法忽略 `scanOrder` 参数；支持 `intensity`（阈值强度）与 `patternSize`（阈值单元缩放）调节。
 
-| 算法          | 预览                                                                                                 |
-|-------------|----------------------------------------------------------------------------------------------------|
-| `none`（无抖动） | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/none.png" width="200"/>      |
-| `bayer2x2`  | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer2x2.png" width="200"/>  |
-| `bayer4x4`  | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer4x4.png" width="200"/>  |
-| `bayer8x8`  | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer8x8.png" width="200"/>  |
-| `blueNoise` | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/blueNoise.png" width="200"/> |
+| `none`（无抖动）                                                                                   | `bayer2x2`                                                                                        | `bayer4x4`                                                                                        | `bayer8x8`                                                                                        | `blueNoise`                                                                                        |
+|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+| <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/none.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer2x2.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer4x4.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/bayer8x8.png" width="200"/> | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/blueNoise.png" width="200"/> |
 
 ### 🌊 误差扩散抖动
 
