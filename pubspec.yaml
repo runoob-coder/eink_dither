@@ -12,101 +12,29 @@ topics:
   - bill-atkinson
 
 screenshots:
+  # Error-diffusion dithering (raster scan)
+  - description: "Floyd–Steinberg — raster scan"
+    path: result/floydSteinberg_raster.png
+  - description: "False Floyd–Steinberg (Heckbert) — raster scan"
+    path: result/falseFloydSteinberg_raster.png
+  - description: "Stucki — raster scan"
+    path: result/stucki_raster.png
+  - description: "Atkinson — raster scan"
+    path: result/atkinson_raster.png
+  - description: "Jarvis–Judice–Ninke — raster scan"
+    path: result/jarvisJudiceNinke_raster.png
+  - description: "Burkes — raster scan"
+    path: result/burkes_raster.png
+  - description: "Sierra (Sierra-3) — raster scan"
+    path: result/sierra3_raster.png
+  - description: "Sierra Lite (Sierra-2-4-A) — raster scan"
+    path: result/sierraLite_raster.png
+
   # Ordered dithering
-  - description: "Ordered dithering — Bayer 2×2 matrix"
-    path: result/bayer2x2.png
-  - description: "Ordered dithering — Bayer 4×4 matrix"
-    path: result/bayer4x4.png
   - description: "Ordered dithering — Bayer 8×8 matrix"
     path: result/bayer8x8.png
   - description: "Ordered dithering — blue-noise (void-and-cluster) mask"
     path: result/blueNoise.png
-
-  # Error-diffusion dithering (kernel × scan order)
-  - description: "Floyd–Steinberg — raster scan"
-    path: result/floydSteinberg_raster.png
-  - description: "Floyd–Steinberg — serpentine scan"
-    path: result/floydSteinberg_serpentine.png
-  - description: "Floyd–Steinberg — zigzag scan"
-    path: result/floydSteinberg_zigzag.png
-  - description: "Floyd–Steinberg — Hilbert scan"
-    path: result/floydSteinberg_hilbert.png
-
-  - description: "False Floyd–Steinberg (Heckbert) — raster scan"
-    path: result/falseFloydSteinberg_raster.png
-  - description: "False Floyd–Steinberg (Heckbert) — serpentine scan"
-    path: result/falseFloydSteinberg_serpentine.png
-  - description: "False Floyd–Steinberg (Heckbert) — zigzag scan"
-    path: result/falseFloydSteinberg_zigzag.png
-  - description: "False Floyd–Steinberg (Heckbert) — Hilbert scan"
-    path: result/falseFloydSteinberg_hilbert.png
-
-  - description: "Stucki — raster scan"
-    path: result/stucki_raster.png
-  - description: "Stucki — serpentine scan"
-    path: result/stucki_serpentine.png
-  - description: "Stucki — zigzag scan"
-    path: result/stucki_zigzag.png
-  - description: "Stucki — Hilbert scan"
-    path: result/stucki_hilbert.png
-
-  - description: "Atkinson — raster scan"
-    path: result/atkinson_raster.png
-  - description: "Atkinson — serpentine scan"
-    path: result/atkinson_serpentine.png
-  - description: "Atkinson — zigzag scan"
-    path: result/atkinson_zigzag.png
-  - description: "Atkinson — Hilbert scan"
-    path: result/atkinson_hilbert.png
-
-  - description: "Jarvis–Judice–Ninke — raster scan"
-    path: result/jarvisJudiceNinke_raster.png
-  - description: "Jarvis–Judice–Ninke — serpentine scan"
-    path: result/jarvisJudiceNinke_serpentine.png
-  - description: "Jarvis–Judice–Ninke — zigzag scan"
-    path: result/jarvisJudiceNinke_zigzag.png
-  - description: "Jarvis–Judice–Ninke — Hilbert scan"
-    path: result/jarvisJudiceNinke_hilbert.png
-
-  - description: "Burkes — raster scan"
-    path: result/burkes_raster.png
-  - description: "Burkes — serpentine scan"
-    path: result/burkes_serpentine.png
-  - description: "Burkes — zigzag scan"
-    path: result/burkes_zigzag.png
-  - description: "Burkes — Hilbert scan"
-    path: result/burkes_hilbert.png
-
-  - description: "Sierra (Sierra-3) — raster scan"
-    path: result/sierra3_raster.png
-  - description: "Sierra (Sierra-3) — serpentine scan"
-    path: result/sierra3_serpentine.png
-  - description: "Sierra (Sierra-3) — zigzag scan"
-    path: result/sierra3_zigzag.png
-  - description: "Sierra (Sierra-3) — Hilbert scan"
-    path: result/sierra3_hilbert.png
-
-  - description: "Two-Row Sierra (Sierra-2) — raster scan"
-    path: result/sierra2_raster.png
-  - description: "Two-Row Sierra (Sierra-2) — serpentine scan"
-    path: result/sierra2_serpentine.png
-  - description: "Two-Row Sierra (Sierra-2) — zigzag scan"
-    path: result/sierra2_zigzag.png
-  - description: "Two-Row Sierra (Sierra-2) — Hilbert scan"
-    path: result/sierra2_hilbert.png
-
-  - description: "Sierra Lite (Sierra-2-4-A) — raster scan"
-    path: result/sierraLite_raster.png
-  - description: "Sierra Lite (Sierra-2-4-A) — serpentine scan"
-    path: result/sierraLite_serpentine.png
-  - description: "Sierra Lite (Sierra-2-4-A) — zigzag scan"
-    path: result/sierraLite_zigzag.png
-  - description: "Sierra Lite (Sierra-2-4-A) — Hilbert scan"
-    path: result/sierraLite_hilbert.png
-
-  # None
-  - description: "No dithering — plain quantization to the palette"
-    path: result/none.png
 
 include:
   - pubspec.yaml
