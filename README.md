@@ -49,6 +49,7 @@ Future<void> main() async {
     ditherKernel: DitherKernel.floydSteinberg,
     scanOrder: DitherScanOrder.serpentine,
     intensity: 1.0,
+    patternSize: 1,
     maxSize: 700,
   );
 
@@ -106,13 +107,14 @@ final q2 = EInkPaletteQuantizer.of(EInkPalette.spectra6);
 `process` runs on the calling thread; `processIsolated` runs the
 same work inside a `compute` isolate so the UI never blocks.
 
-| Property       | Type              | Default                       | Description                                                      |
-|----------------|-------------------|-------------------------------|------------------------------------------------------------------|
-| `palette`      | `EInkPalette`     | `EInkPalette.spectra6`        | Target ink palette.                                              |
-| `ditherKernel` | `DitherKernel`    | `DitherKernel.floydSteinberg` | Dithering algorithm.                                             |
-| `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | Pixel-visit order (error-diffusion only).                        |
-| `intensity`    | `double`          | `1.0`                         | Dither intensity for ordered kernels; ignored by error-diffusion. |
-| `maxSize`      | `int`             | `800`                         | Longest edge is capped to this (proportional resize).            |
+| Property       | Type              | Default                       | Description                                                               |
+|----------------|-------------------|-------------------------------|---------------------------------------------------------------------------|
+| `palette`      | `EInkPalette`     | `EInkPalette.spectra6`        | Target ink palette.                                                       |
+| `ditherKernel` | `DitherKernel`    | `DitherKernel.floydSteinberg` | Dithering algorithm.                                                      |
+| `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | Pixel-visit order (error-diffusion only).                                 |
+| `intensity`    | `double`          | `1.0`                         | Dither intensity for ordered kernels; ignored by error-diffusion.         |
+| `patternSize`  | `int`             | `1`                           | Scales ordered-dither cells or error-diffusion blocks (larger = coarser). |
+| `maxSize`      | `int`             | `800`                         | Longest edge is capped to this (proportional resize).                     |
 
 ```dart
 img.Image? process(Uint8List bytes);
@@ -162,7 +164,8 @@ All previews below were generated with `EInkPalette.spectra6` at `maxSize: 700`.
 
 ### 🟦 Ordered dithering
 
-These kernels ignore `scanOrder`. `intensity` (threshold intensity) applies to them only.
+These kernels ignore `scanOrder`. `intensity` (threshold intensity) and `patternSize`
+(threshold-cell scale) apply to them only.
 
 | Algorithm             | Preview                                                                                            |
 |-----------------------|----------------------------------------------------------------------------------------------------|
@@ -201,6 +204,7 @@ final out = ditherImage(
   quantizer: quantizer,
   kernel: DitherKernel.floydSteinberg,
   scanOrder: DitherScanOrder.hilbert,
+  patternSize: 1,
 );
 ```
 
@@ -209,7 +213,7 @@ final out = ditherImage(
 - **Repository**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
 - **Issue tracker**: [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
 - **Example app**: The `example/` directory contains a Flutter demo that lets you pick an image and
-  tweak palette, kernel, scan order, and intensity live.
+  tweak palette, kernel, scan order, intensity, and pattern size live.
 - **Contributions**: Pull requests and issues are welcome!
 
 ## 💛 Support

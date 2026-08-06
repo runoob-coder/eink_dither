@@ -303,6 +303,18 @@ List<List<double>> _generateBlueNoiseMask(int size) {
 /// kernels ([DitherKernel.bayer2x2], [DitherKernel.bayer4x4],
 /// [DitherKernel.bayer8x8] and [DitherKernel.blueNoise]); it is ignored by
 /// the error-diffusion kernels.
+///
+/// [patternSize] scales the dither pattern, making it coarser / larger (similar
+/// to the "Pattern Size" control in many halftone editors). `1` reproduces the
+/// classic 1:1 look.
+///
+/// For the ordered kernels ([DitherKernel.bayer2x2], [DitherKernel.bayer4x4],
+/// [DitherKernel.bayer8x8] and [DitherKernel.blueNoise]) each threshold-matrix
+/// cell covers [patternSize]×[patternSize] pixels instead of 1×1. For the
+/// error-diffusion kernels ([DitherKernel.floydSteinberg], [DitherKernel.stucki],
+/// etc.) the diffusion is run on a [patternSize]×[patternSize]-block
+/// downsampled grid and each block is then expanded back, so the dither "dots"
+/// grow with [patternSize].
 img.Image ditherImage(
   img.Image image, {
   img.Quantizer? quantizer,
@@ -314,6 +326,7 @@ img.Image ditherImage(
   bool serpentine = false,
   DitherScanOrder scanOrder = DitherScanOrder.zigzag,
   double intensity = 1.0,
+  int patternSize = 1,
 }) {
   quantizer ??= img.NeuralQuantizer(image);
 
@@ -322,13 +335,82 @@ img.Image ditherImage(
   }
 
   if (_isOrderedDither(kernel)) {
-    return ditherImageOrdered(image, quantizer, kernel, intensity);
+    return ditherImageOrdered(
+      image,
+      quantizer,
+      kernel,
+      intensity,
+      patternSize: patternSize,
+    );
   }
 
   final order = serpentine
       // ignore: deprecated_member_use_from_same_package
       ? DitherScanOrder.serpentine
       : scanOrder;
+
+  // Error-diffusion kernels. With [patternSize] > 1 the diffusion is run on a
+  // [patternSize]×[patternSize]-block downsampled grid and each block is then
+  // expanded back, growing the dither "dots" (a "Pattern Size" control). The
+  // diffusion core below is reused via the [patternSize] == 1 recursion, so no
+  // diffusion logic is duplicated.
+  if (patternSize > 1) {
+    final ps = patternSize;
+
+    // Build the reduced image by averaging each block.
+    var rSum = 0;
+    var gSum = 0;
+    var bSum = 0;
+    var count = 0;
+    final reduced = img.Image(
+      width: (image.width + ps - 1) ~/ ps,
+      height: (image.height + ps - 1) ~/ ps,
+      numChannels: 3,
+    );
+    _forEachBlockPixel(image.width, image.height, ps,
+      (bx, by) {
+        rSum = gSum = bSum = count = 0;
+      },
+      (bx, by, x, y) {
+        final pc = image.getPixel(x, y);
+        rSum += pc.r.toInt();
+        gSum += pc.g.toInt();
+        bSum += pc.b.toInt();
+        count++;
+      },
+      (bx, by) {
+        reduced.setPixelRgb(bx, by, rSum ~/ count, gSum ~/ count, bSum ~/ count);
+      },
+    );
+
+    // Diffuse the coarse grid (recursion terminates: [patternSize] == 1).
+    final reducedIndexed = ditherImage(
+      reduced,
+      quantizer: quantizer,
+      kernel: kernel,
+      scanOrder: order,
+    );
+
+    // Expand each reduced pixel into a [ps]×[ps] block of the same index.
+    var index = 0;
+    final out = img.Image(
+      width: image.width,
+      height: image.height,
+      numChannels: 1,
+      palette: quantizer.palette,
+    );
+    _forEachBlockPixel(image.width, image.height, ps,
+      (bx, by) {
+        index = reducedIndexed.getPixelIndex(bx, by);
+      },
+      (bx, by, x, y) {
+        out.setPixelIndex(x, y, index);
+      },
+      (bx, by) {},
+    );
+
+    return out;
+  }
 
   final q = quantizer;
   final ds = _errorDiffusionKernels[kernel]!;
@@ -449,6 +531,40 @@ img.Image ditherImage(
   return indexedImage;
 }
 
+/// Walks every pixel in every [ps]×[ps] block of a 2D image grid, calling
+/// [onBlockStart], [onPixel], and [onBlockEnd] for each block. Coordinates
+/// `(x, y)` refer to the original image; `(bx, by)` are block indices.
+///
+/// This iterator eliminates the duplication of the 5-level nested loop +
+/// bounds-check pattern that was previously repeated in the down-sampling and
+/// expansion stages of the error-diffusion [patternSize] > 1 path.
+void _forEachBlockPixel(
+  int imageW,
+  int imageH,
+  int ps,
+  void Function(int bx, int by) onBlockStart,
+  void Function(int bx, int by, int x, int y) onPixel,
+  void Function(int bx, int by) onBlockEnd,
+) {
+  final rw = (imageW + ps - 1) ~/ ps;
+  final rh = (imageH + ps - 1) ~/ ps;
+  for (var by = 0; by < rh; by++) {
+    for (var bx = 0; bx < rw; bx++) {
+      onBlockStart(bx, by);
+      for (var dy = 0; dy < ps; dy++) {
+        final y = by * ps + dy;
+        if (y >= imageH) break;
+        for (var dx = 0; dx < ps; dx++) {
+          final x = bx * ps + dx;
+          if (x >= imageW) break;
+          onPixel(bx, by, x, y);
+        }
+      }
+      onBlockEnd(bx, by);
+    }
+  }
+}
+
 /// Returns the threshold matrix for an ordered-dither [kernel], or `null`
 /// if [kernel] is not an ordered-dither variant.
 List<List<double>>? _orderedDitherMatrix(DitherKernel kernel) {
@@ -473,12 +589,17 @@ bool _isOrderedDither(DitherKernel kernel) =>
 /// [DitherKernel.bayer8x8]) or [DitherKernel.blueNoise]. Passing any other
 /// [DitherKernel] triggers an assertion failure. The threshold matrix is
 /// resolved internally via [_orderedDitherMatrix] from [kernel].
+///
+/// [patternSize] scales the threshold matrix: each matrix cell covers
+/// [patternSize]×[patternSize] pixels instead of 1×1, stretching the dither
+/// pattern to be coarser / larger. `1` reproduces the classic 1:1 look.
 img.Image ditherImageOrdered(
   img.Image image,
   img.Quantizer? quantizer,
   DitherKernel kernel,
-  double intensity,
-) {
+  double intensity, {
+  int patternSize = 1,
+}) {
   final matrix = _orderedDitherMatrix(kernel);
   assert(
     matrix != null,
@@ -498,12 +619,15 @@ img.Image ditherImageOrdered(
     palette: palette,
   );
 
+  // Each threshold cell covers [ps]×[ps] pixels, so the pattern is stretched.
+  final ps = patternSize < 1 ? 1 : patternSize;
+
   for (var y = 0; y < height; y++) {
-    final row = matrix[y % n];
+    final row = matrix[(y ~/ ps) % n];
     for (var x = 0; x < width; x++) {
       final pc = image.getPixel(x, y);
       // Centered threshold in the range [-0.5, 0.5).
-      final t = row[x % n] - 0.5;
+      final t = row[(x ~/ ps) % n] - 0.5;
       final d = t * 255 * intensity;
       final r = _clampChannel(pc[0] + d);
       final g = _clampChannel(pc[1] + d);
@@ -529,17 +653,28 @@ img.Image ditherImageOrdered(
 ///
 /// [intensity] scales the dither offset (defaults to 1.0 for the classic
 /// full-range Bayer look; smaller values give subtler banding reduction).
+///
+/// [patternSize] scales the threshold matrix: each matrix cell covers
+/// [patternSize]×[patternSize] pixels instead of 1×1, stretching the dither
+/// pattern to be coarser / larger. `1` reproduces the classic 1:1 look.
 img.Image ditherImageBayer(
   img.Image image, [
   img.Quantizer? quantizer,
   DitherKernel kernel = DitherKernel.bayer4x4,
   double intensity = 1.0,
+  int patternSize = 1,
 ]) {
   assert(
     _bayerMatrices.containsKey(kernel),
     'kernel must be a Bayer variant: bayer2x2, bayer4x4 or bayer8x8',
   );
-  return ditherImageOrdered(image, quantizer, kernel, intensity);
+  return ditherImageOrdered(
+    image,
+    quantizer,
+    kernel,
+    intensity,
+    patternSize: patternSize,
+  );
 }
 
 /// Dither an image using a blue-noise threshold mask. Unlike Bayer matrices,
@@ -554,12 +689,23 @@ img.Image ditherImageBayer(
 ///
 /// [intensity] scales the dither offset (defaults to 1.0 for the full-range
 /// look; smaller values give subtler banding reduction).
+///
+/// [patternSize] scales the threshold matrix: each matrix cell covers
+/// [patternSize]×[patternSize] pixels instead of 1×1, stretching the dither
+/// pattern to be coarser / larger. `1` reproduces the classic 1:1 look.
 img.Image ditherImageBlueNoise(
   img.Image image, [
   img.Quantizer? quantizer,
   double intensity = 1.0,
+  int patternSize = 1,
 ]) {
-  return ditherImageOrdered(image, quantizer, DitherKernel.blueNoise, intensity);
+  return ditherImageOrdered(
+    image,
+    quantizer,
+    DitherKernel.blueNoise,
+    intensity,
+    patternSize: patternSize,
+  );
 }
 
 /// Converts a Hilbert curve index [d] to (x, y) coordinates for an [n]×[n]

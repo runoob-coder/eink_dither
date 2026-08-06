@@ -2,20 +2,31 @@
 
 - 💥 **Breaking change**: renamed the ordered-dither `strength` parameter back to
   `intensity` for a more fitting, consistent name across the dithering API:
-  - `EInkImageProcessor.strength` → `intensity`
-  - `ditherImage`, `ditherImageOrdered`, `ditherImageBayer`, `ditherImageBlueNoise`
-    parameter `strength` → `intensity`
-  - Update call sites, e.g. `EInkImageProcessor(intensity: 1.0)` and
-    `ditherImage(image, intensity: 1.0)`.
+    - `EInkImageProcessor.strength` → `intensity`
+    - `ditherImage`, `ditherImageOrdered`, `ditherImageBayer`, `ditherImageBlueNoise`
+      parameter `strength` → `intensity`
+    - Update call sites, e.g. `EInkImageProcessor(intensity: 1.0)` and
+      `ditherImage(image, intensity: 1.0)`.
+- ✨ **New feature**: added a `patternSize` parameter ("Pattern Size") to control the
+  scale of the dither pattern, similar to the control in many halftone editors:
+    - `EInkImageProcessor.patternSize`
+    - `ditherImage`, `ditherImageOrdered`, `ditherImageBayer`, `ditherImageBlueNoise`
+      parameter `patternSize` (default `1`)
+    - For **ordered kernels** (Bayer / blue noise) each threshold-matrix cell now covers
+      `patternSize`×`patternSize` pixels instead of 1×1, stretching the pattern to be
+      coarser / larger.
+    - For **error-diffusion kernels** (Floyd–Steinberg, Stucki, etc.) the diffusion now
+      runs on a `patternSize`×`patternSize`-block downsampled grid and each block is
+      expanded back, so the dither "dots" grow with `patternSize`.
 
 ## 2.0.0
 
 - 💥 **Breaking change**: renamed the ordered-dither strength parameter for a consistent
   naming convention across the dithering API:
-  - `EInkImageProcessor.intensity` → `strength`
-  - `ditherImage` parameter `bayerStrength` → `strength`
-  - Update call sites, e.g. `EInkImageProcessor(strength: 1.0)` and
-    `ditherImage(image, strength: 1.0)`.
+    - `EInkImageProcessor.intensity` → `strength`
+    - `ditherImage` parameter `bayerStrength` → `strength`
+    - Update call sites, e.g. `EInkImageProcessor(strength: 1.0)` and
+      `ditherImage(image, strength: 1.0)`.
 - 💥 **Breaking change**: `ditherImageOrdered` now takes a `DitherKernel kernel`
   instead of a raw `List<List<double>> matrix`. The threshold matrix is resolved
   internally via `_orderedDitherMatrix`, so callers pass the kernel

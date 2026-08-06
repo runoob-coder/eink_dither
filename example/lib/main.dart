@@ -52,6 +52,7 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
   DitherKernel _selectedKernel = .floydSteinberg;
   DitherScanOrder _selectedScanOrder = .serpentine;
   double _intensity = 1.0;
+  int _patternSize = 1;
 
   // ---------- display-name helpers ----------
 
@@ -112,6 +113,11 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
   };
 
   bool get _intensityVisible => _kernelsWithIntensity.contains(_selectedKernel);
+
+  // Pattern Size applies to all kernels except "none": ordered dithers scale
+  // each threshold cell, while error-diffusion kernels run on a block grid. For
+  // "none" there is nothing to coarsen, so the slider is hidden.
+  bool get _patternSizeVisible => _selectedKernel != DitherKernel.none;
 
   List<Color> _paletteColors(EInkPalette p) =>
       p.colors.map((c) => Color.fromARGB(255, c.r, c.g, c.b)).toList();
@@ -175,6 +181,7 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
           ditherKernel: _selectedKernel,
           scanOrder: _selectedScanOrder,
           intensity: _intensity,
+          patternSize: _patternSize,
           maxSize: 800,
         );
 
@@ -483,6 +490,32 @@ class _DitherDemoPageState extends State<DitherDemoPage> {
                 ),
                 Text(
                   '${(_intensity * 100).round()}%',
+                  style: Theme.of(context).textTheme.labelMedium,
+                ),
+              ],
+            ),
+          if (_patternSizeVisible)
+            Row(
+              children: [
+                const Icon(Icons.grid_4x4, size: 20),
+                const SizedBox(width: 8),
+                Text(
+                  'Pattern Size',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                Expanded(
+                  child: Slider(
+                    value: _patternSize.toDouble(),
+                    min: 1.0,
+                    max: 16.0,
+                    divisions: 15,
+                    label: '${_patternSize}\u00d7',
+                    onChanged: (v) => setState(() => _patternSize = v.round()),
+                    onChangeEnd: (_) => _processImage(),
+                  ),
+                ),
+                Text(
+                  '${_patternSize}\u00d7',
                   style: Theme.of(context).textTheme.labelMedium,
                 ),
               ],

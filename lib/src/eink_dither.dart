@@ -155,6 +155,7 @@ class EInkImageProcessor {
     this.ditherKernel = img.DitherKernel.floydSteinberg,
     this.scanOrder = DitherScanOrder.raster,
     this.intensity = 1.0,
+    this.patternSize = 1,
     this.maxSize = 800,
   });
 
@@ -171,6 +172,18 @@ class EInkImageProcessor {
   /// Scales the threshold offset; 1.0 is the standard intensity. The
   /// error-diffusion kernels ignore this value.
   final double intensity;
+
+  /// Pattern size for every dithering kernel (all except [DitherKernel.none]).
+  /// `1` is the classic 1:1 look; larger values make the dither pattern coarser
+  /// / larger (similar to a halftone "Pattern Size" control).
+  ///
+  /// For the ordered kernels (Bayer / blue noise) each threshold-matrix cell
+  /// covers [patternSize]×[patternSize] pixels instead of 1×1. For the
+  /// error-diffusion kernels ([DitherKernel.floydSteinberg], [DitherKernel.stucki],
+  /// etc.) the diffusion runs on a [patternSize]×[patternSize]-block downsampled
+  /// grid and each block is expanded back, so the dither "dots" grow with
+  /// [patternSize].
+  final int patternSize;
 
   /// Maximum size (limits the longest side).
   final int maxSize;
@@ -194,6 +207,7 @@ class EInkImageProcessor {
       kernel: ditherKernel,
       scanOrder: scanOrder,
       intensity: intensity,
+      patternSize: patternSize,
     );
   }
 

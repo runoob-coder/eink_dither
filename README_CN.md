@@ -46,6 +46,7 @@ Future<void> main() async {
     ditherKernel: DitherKernel.floydSteinberg,
     scanOrder: DitherScanOrder.serpentine,
     intensity: 1.0,
+    patternSize: 1,
     maxSize: 700,
   );
 
@@ -101,13 +102,14 @@ final q2 = EInkPaletteQuantizer.of(EInkPalette.spectra6);
 
 `process` 在调用线程执行；`processIsolated` 在 `compute` isolate 中执行，避免阻塞 UI。
 
-| 属性             | 类型                | 默认值                           | 说明                    |
-|----------------|-------------------|-------------------------------|-----------------------|
-| `palette`      | `EInkPalette`     | `EInkPalette.spectra6`        | 目标墨水屏颜色调色板。           |
-| `ditherKernel` | `DitherKernel`    | `DitherKernel.floydSteinberg` | 抖动算法。                 |
-| `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | 像素遍历顺序（仅误差扩散类生效）。     |
-| `intensity`    | `double`          | `1.0`                         | 有序算法的抖动强度；误差扩散算法忽略此值。 |
-| `maxSize`      | `int`             | `800`                         | 最长边被限制为该值（等比缩放）。      |
+| 属性             | 类型                | 默认值                           | 说明                        |
+|----------------|-------------------|-------------------------------|---------------------------|
+| `palette`      | `EInkPalette`     | `EInkPalette.spectra6`        | 目标墨水屏颜色调色板。               |
+| `ditherKernel` | `DitherKernel`    | `DitherKernel.floydSteinberg` | 抖动算法。                     |
+| `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | 像素遍历顺序（仅误差扩散类生效）。         |
+| `intensity`    | `double`          | `1.0`                         | 有序算法的抖动强度；误差扩散算法忽略此值。     |
+| `patternSize`  | `int`             | `1`                           | 缩放有序抖动的阈值单元或误差扩散的块（越大越粗）。 |
+| `maxSize`      | `int`             | `800`                         | 最长边被限制为该值（等比缩放）。          |
 
 ```dart
 img.Image? process(Uint8List bytes);
@@ -155,7 +157,7 @@ enum DitherKernel {
 
 ### 🟦 有序抖动
 
-有序抖动算法忽略 `scanOrder` 参数；支持 `intensity`（阈值强度）调节。
+有序抖动算法忽略 `scanOrder` 参数；支持 `intensity`（阈值强度）与 `patternSize`（阈值单元缩放）调节。
 
 | 算法          | 预览                                                                                                 |
 |-------------|----------------------------------------------------------------------------------------------------|
@@ -194,6 +196,7 @@ final out = ditherImage(
   quantizer: quantizer,
   kernel: DitherKernel.floydSteinberg,
   scanOrder: DitherScanOrder.hilbert,
+  patternSize: 1,
 );
 ```
 
@@ -202,7 +205,7 @@ final out = ditherImage(
 - **仓库**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
 - **问题反馈**: [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
 - **示例应用**: `example/` 目录包含一个 Flutter 演示程序，可选择图像并实时调节调色板、抖动算法、
-  扫描顺序与强度。
+  扫描顺序、强度与图案尺寸。
 - **贡献**: 欢迎提交 Pull Request 和 Issue！
 
 ## 💛 支持
