@@ -145,7 +145,7 @@ const Map<DitherKernel, List<List<num>>> _errorDiffusionKernels = {
     [2 / 16, 1, 1],
     [1 / 16, 2, 1],
   ],
-  // Sierra Lite (Sierra-2-4-A)
+  // Sierra Lite (Sierra-2-4A)
   DitherKernel.sierraLite: [
     [2 / 4, 1, 0],
     [1 / 4, -1, 1],

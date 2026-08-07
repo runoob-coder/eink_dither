@@ -17,7 +17,7 @@ Language: English | [中文](https://github.com/runoob-coder/eink_dither/blob/ma
 
 - **13 dithering kernels** — error-diffusion (Floyd–Steinberg, Stucki, Atkinson,
   Jarvis–Judice–Ninke, Burkes, False Floyd–Steinberg (Heckbert), Sierra-3, Two-Row Sierra,
-  Sierra Lite (Sierra-2-4-A)), ordered (Bayer 2×2/4×4/8×8, Blue Noise), and none (no dithering).
+  Sierra Lite (Sierra-2-4A)), ordered (Bayer 2×2/4×4/8×8, Blue Noise), and none (no dithering).
 - **4 scan orders** for error-diffusion kernels (raster, serpentine, zigzag, Hilbert
   space-filling curve).
 - **8 E-Ink palettes** — from pure black/white up to 7-color (Gallery 7) and 16-level
@@ -29,7 +29,8 @@ Language: English | [中文](https://github.com/runoob-coder/eink_dither/blob/ma
 
 ## 📦 Installation
 
-Install via pub.dev → [pub.dev/packages/eink_dither/install](https://pub.dev/packages/eink_dither/install)
+Install via pub.dev →
+[pub.dev/packages/eink_dither/install](https://pub.dev/packages/eink_dither/install)
 
 ## 🚀 Quick Start
 
@@ -153,7 +154,7 @@ The Sierra family (Frankie Sierra) trades quality for speed as the kernel shrink
 |--------------|------------------|:----------:|:-------:|--------------------------------------------------------------------|
 | `sierra3`    | Sierra, Sierra-3 |     10     |   32    | Three-row kernel, close to Jarvis quality but noticeably faster.   |
 | `sierra2`    | Two-Row Sierra   |     7      |   16    | Two-row kernel, a good quality/speed compromise.                   |
-| `sierraLite` | Sierra-2-4-A     |     3      |    4    | Smallest variant, fastest; slightly grainier than Floyd–Steinberg. |
+| `sierraLite` | Sierra-2-4A      |     3      |    4    | Smallest variant, fastest; slightly grainier than Floyd–Steinberg. |
 
 ### 🔀 `DitherScanOrder`
 
@@ -196,7 +197,7 @@ The combination `kernel × scanOrder` produces a distinct texture.
 | **Burkes**                           | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_hilbert.png" width="200"/>              |
 | **Sierra (Sierra-3)**                | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_hilbert.png" width="200"/>             |
 | **Two-Row Sierra (Sierra-2)**        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_hilbert.png" width="200"/>             |
-| **Sierra Lite (Sierra-2-4-A)**       | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_raster.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_serpentine.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_zigzag.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_hilbert.png" width="200"/>          |
+| **Sierra Lite (Sierra-2-4A)**        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_raster.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_serpentine.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_zigzag.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_hilbert.png" width="200"/>          |
 
 ## 🔧 Low-level API
 
@@ -221,7 +222,8 @@ final out = ditherImage(
 ## ℹ️ Additional information
 
 - **Repository**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
-- **Issue tracker**: [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
+- **Issue tracker**:
+  [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
 - **Example app**: The `example/` directory contains a Flutter demo that lets you pick an image and
   tweak palette, kernel, scan order, intensity, and pattern size live.
 - **Contributions**: Pull requests and issues are welcome!
@@ -245,7 +247,7 @@ It only takes a few seconds and helps other Flutter developers discover the libr
 This package stands on the shoulders of the researchers who pioneered digital dithering and
 halftoning. We gratefully acknowledge their foundational contributions:
 
-- **Floyd–Steinberg** — Robert W. Floyd & Louis Steinberg (1976), the classic error-diffusion
+- **Floyd–Steinberg** — Robert W. Floyd & Louis Steinberg (1975 - 1976), the classic error-diffusion
   kernel.
 - **False Floyd–Steinberg (Heckbert)** — Paul Heckbert, introduced in his 1982 SIGGRAPH course notes
   *Color Image Quantization for Frame Buffer Display*.
@@ -253,9 +255,11 @@ halftoning. We gratefully acknowledge their foundational contributions:
 - **Stucki** — Peter Stucki (1981), an optimized refinement of the Jarvis kernel at IBM.
 - **Burkes** — Daniel Burkes, a simplified 7-pixel variant of the Jarvis–Judice–Ninke kernel.
 - **Atkinson** — Bill Atkinson, created for MacPaint / HyperCard on early Macintosh systems.
-- **Sierra (Sierra-3), Two-Row Sierra (Sierra-2) and Sierra Lite (Sierra-2-4-A)** — Frankie Sierra
+- **Sierra (Sierra-3), Two-Row Sierra (Sierra-2) and Sierra Lite (Sierra-2-4A)** — Frankie Sierra
   (1989–1990), a family of progressively smaller kernels balancing quality against speed.
 - **Bayer (ordered dithering)** — Bryce E. Bayer (1973), best known for the Bayer color filter
   array.
-- **Blue noise / void-and-cluster** — Robert A. Ulichney (1987, 1993), *Digital Halftoning*, who
-  formalized blue-noise dithering and the void-and-cluster mask generation method.
+- **Blue noise / void-and-cluster** — [Robert A. Ulichney](https://cv.ulichney.com/) (1987, 1993),
+  *Digital Halftoning*, who formalized blue-noise dithering and
+  the [void-and-cluster](https://cv.ulichney.com/papers/1993-void-cluster.pdf) mask generation
+  method.

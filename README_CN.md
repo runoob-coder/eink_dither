@@ -14,9 +14,9 @@ Language: [English](README.md) | 中文
 
 ## ✨ 特性
 
-- **13 种抖动算法**——误差扩散类（Floyd–Steinberg、Stucki、Atkinson、
-  Jarvis–Judice–Ninke、Burkes、False Floyd–Steinberg（Heckbert）、Sierra-3、Two-Row Sierra、
-  Sierra Lite（Sierra-2-4-A））、有序类（拜耳矩阵 Bayer 2×2 / 4×4 / 8×8、蓝噪声），以及无抖动（none）。
+- **13 种抖动算法**——误差扩散类（Floyd–Steinberg、Stucki、Atkinson、 Jarvis–Judice–Ninke、Burkes、
+  False Floyd–Steinberg（Heckbert）、Sierra-3、Two-Row Sierra、 Sierra Lite（Sierra-2-4A））、
+  有序类（拜耳矩阵 Bayer 2×2 / 4×4 / 8×8、蓝噪声），以及无抖动（none）。
 - **4 种扫描顺序（scan order）**——用于误差扩散算法（raster、serpentine、zigzag、
   Hilbert 空间填充曲线）。
 - **8 种墨水屏调色板**——从纯黑白到 7 色（Gallery 7）以及 16 级灰度（Carta 16）。
@@ -26,7 +26,8 @@ Language: [English](README.md) | 中文
 
 ## 📦 安装
 
-通过 pub.dev 安装 → [pub.dev/packages/eink_dither/install](https://pub-web.flutter-io.cn/packages/eink_dither/install)
+通过 pub.dev 安装 →
+[pub.dev/packages/eink_dither/install](https://pub-web.flutter-io.cn/packages/eink_dither/install)
 
 ## 🚀 快速开始
 
@@ -119,7 +120,7 @@ Future<img.Image?> processIsolated(Uint8List bytes);
 
 ### 🎛️ `DitherKernel`
 
-抖动算法枚举。误差扩散算法（除 `none` 外）将量化误差传播给邻居；有序算法
+抖动算法枚举。误差扩散算法（除 `none` 外）将量化误差传播给邻域；有序算法
 （`bayer2x2`、`bayer4x4`、`bayer8x8`、`blueNoise`）使用固定的阈值矩阵，与位置无关。
 
 ```dart
@@ -143,11 +144,11 @@ enum DitherKernel {
 
 Sierra 系列（由 Frankie Sierra 提出）随着核尺寸缩小，以质量换取速度：
 
-| 算法           | 别名              | 扩散邻居数 | 除数 | 说明                                 |
+| 算法           | 别名              | 扩散邻域数 | 除数 | 说明                                 |
 |--------------|-----------------|:-----:|:--:|------------------------------------|
 | `sierra3`    | Sierra、Sierra-3 |  10   | 32 | 三行卷积核，质量接近 Jarvis，但速度明显更快。         |
 | `sierra2`    | Two-Row Sierra  |   7   | 16 | 两行卷积核，质量与速度的良好折中。                  |
-| `sierraLite` | Sierra-2-4-A    |   3   | 4  | 最小的变体，速度最快；颗粒感略强于 Floyd–Steinberg。 |
+| `sierraLite` | Sierra-2-4A     |   3   | 4  | 最小的变体，速度最快；颗粒感略强于 Floyd–Steinberg。 |
 
 ### 🔀 `DitherScanOrder`
 
@@ -188,7 +189,7 @@ Sierra 系列（由 Frankie Sierra 提出）随着核尺寸缩小，以质量换
 | **Burkes**                          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_raster.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_serpentine.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_zigzag.png" width="200"/>              | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/burkes_hilbert.png" width="200"/>              |
 | **Sierra（Sierra-3）**                | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra3_hilbert.png" width="200"/>             |
 | **Two-Row Sierra（Sierra-2）**        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_raster.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_serpentine.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_zigzag.png" width="200"/>             | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierra2_hilbert.png" width="200"/>             |
-| **Sierra Lite（Sierra-2-4-A）**       | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_raster.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_serpentine.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_zigzag.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_hilbert.png" width="200"/>          |
+| **Sierra Lite（Sierra-2-4A）**        | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_raster.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_serpentine.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_zigzag.png" width="200"/>          | <img src="https://github.com/runoob-coder/eink_dither/raw/main/result/sierraLite_hilbert.png" width="200"/>          |
 
 ## 🔧 底层 API
 
@@ -213,7 +214,8 @@ final out = ditherImage(
 ## ℹ️ 更多信息
 
 - **仓库**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
-- **问题反馈**: [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
+- **问题反馈**:
+  [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
 - **示例应用**: `example/` 目录包含一个 Flutter 演示程序，可选择图像并实时调节调色板、抖动算法、
   扫描顺序、强度与图案尺寸。
 - **贡献**: 欢迎提交 Pull Request 和 Issue！
@@ -235,15 +237,16 @@ final out = ditherImage(
 
 本库建立在图像数字抖动（dithering）与半调（halftoning）领域先驱者的研究之上。我们由衷感谢他们的奠基性贡献：
 
-- **Floyd–Steinberg** —— Robert W. Floyd 与 Louis Steinberg（1976），经典误差扩散算法。
+- **Floyd–Steinberg** —— Robert W. Floyd 与 Louis Steinberg (1975 - 1976)，经典误差扩散算法。
 - **False Floyd–Steinberg（Heckbert）** —— Paul Heckbert，在其 1982 年 SIGGRAPH 课程讲义
   *Color Image Quantization for Frame Buffer Display* 中提出。
 - **Jarvis–Judice–Ninke** —— J. F. Jarvis、C. N. Judice 与 W. H. Ninke（1976），贝尔实验室。
 - **Stucki** —— Peter Stucki（1981），在 IBM 对 Jarvis 算法的优化改进。
 - **Burkes** —— Daniel Burkes，Jarvis–Judice–Ninke 算法的简化 7 像素变体。
 - **Atkinson** —— Bill Atkinson，为早期 Macintosh 的 MacPaint / HyperCard 所创。
-- **Sierra（Sierra-3）、Two-Row Sierra（Sierra-2）与 Sierra Lite（Sierra-2-4-A）** —— Frankie Sierra
+- **Sierra（Sierra-3）、Two-Row Sierra（Sierra-2）与 Sierra Lite（Sierra-2-4A）** —— Frankie Sierra
   （1989–1990），一组逐级缩小的卷积核，在质量与速度之间提供不同取舍。
 - **Bayer（有序抖动）** —— Bryce E. Bayer（1973），亦以拜耳色彩滤波阵列闻名。
-- **蓝噪声 / void-and-cluster** —— Robert A. Ulichney（1987、1993），*Digital Halftoning*，
-  确立了蓝噪声抖动及 void-and-cluster 掩码生成方法。
+- **蓝噪声 / void-and-cluster** —— [Robert A. Ulichney](https://cv.ulichney.com/)（1987、1993），
+  *Digital Halftoning*， 确立了蓝噪声抖动及
+  [void-and-cluster](https://cv.ulichney.com/papers/1993-void-cluster.pdf) 掩码生成方法。

@@ -7,9 +7,9 @@ issue_tracker: https://github.com/runoob-coder/eink_dither/issues
 topics:
   - error-diffusion
   - floyd-steinberg
-  - jarvisjudiceninke
-  - peter-stucki
-  - bill-atkinson
+  - digital-halftoning
+  - image-dithering
+  - eink
 
 screenshots:
   # Error-diffusion dithering (raster scan)
@@ -27,7 +27,7 @@ screenshots:
     path: result/burkes_raster.png
   - description: "Sierra (Sierra-3) — raster scan"
     path: result/sierra3_raster.png
-  - description: "Sierra Lite (Sierra-2-4-A) — raster scan"
+  - description: "Sierra Lite (Sierra-2-4A) — raster scan"
     path: result/sierraLite_raster.png
 
   # Ordered dithering
