@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:image/image.dart' as img hide DitherKernel, ditherImage;
 
 import 'dither_image.dart';
-import 'dither_image.dart' as img;
 
 /// Ink colors supported by e-ink displays.
 enum EInkColor {
@@ -52,22 +51,22 @@ enum EInkPalette {
   /// E Ink Carta: monochrome panel with 16 gray levels, level `i`
   /// rendering as `i * 17` in sRGB.
   carta16([
-      .black,
-      .gray1,
-      .gray2,
-      .gray3,
-      .gray4,
-      .gray5,
-      .gray6,
-      .gray7,
-      .gray8,
-      .gray9,
-      .gray10,
-      .gray11,
-      .gray12,
-      .gray13,
-      .gray14,
-      .white,
+    .black,
+    .gray1,
+    .gray2,
+    .gray3,
+    .gray4,
+    .gray5,
+    .gray6,
+    .gray7,
+    .gray8,
+    .gray9,
+    .gray10,
+    .gray11,
+    .gray12,
+    .gray13,
+    .gray14,
+    .white,
   ]);
 
   const EInkPalette(this.colors);
@@ -152,7 +151,7 @@ class EInkPaletteQuantizer extends img.Quantizer {
 class EInkImageProcessor {
   const EInkImageProcessor({
     this.palette = EInkPalette.spectra6,
-    this.ditherKernel = img.DitherKernel.floydSteinberg,
+    this.ditherKernel = DitherKernel.floydSteinberg,
     this.scanOrder = DitherScanOrder.raster,
     this.intensity = 1.0,
     this.patternSize = 1,
@@ -163,10 +162,10 @@ class EInkImageProcessor {
   final EInkPalette palette;
 
   /// Error-diffusion dithering kernel.
-  final img.DitherKernel ditherKernel;
+  final DitherKernel ditherKernel;
 
   /// Pixel visiting order used by the error-diffusion kernels.
-  final img.DitherScanOrder scanOrder;
+  final DitherScanOrder scanOrder;
 
   /// Dither intensity for the ordered kernels (Bayer / blue noise).
   /// Scales the threshold offset; 1.0 is the standard intensity. The
@@ -201,7 +200,7 @@ class EInkImageProcessor {
           : img.copyResize(image, height: maxSize);
     }
 
-    return img.ditherImage(
+    return ditherImage(
       image,
       quantizer: EInkPaletteQuantizer.of(palette),
       kernel: ditherKernel,

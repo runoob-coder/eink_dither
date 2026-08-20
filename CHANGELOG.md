@@ -1,3 +1,8 @@
+## 2.2.3
+
+- ♻️ **Refactor**: dropped the duplicate `dither_image.dart` import alias and referenced
+  `DitherKernel`, `DitherScanOrder` and `ditherImage` directly; no public API changes.
+
 ## 2.2.2
 
 - 📝 **Docs**: improved the documentation.
