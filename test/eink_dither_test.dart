@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image/image.dart' as image_lib;
 
@@ -56,7 +57,7 @@ void main() {
           final encoded = image_lib.encodePng(processed!);
           final fileName = '${kernel.name}.png';
           File('${outputDir.path}/$fileName').writeAsBytesSync(encoded);
-          print('Saved: $fileName');
+          debugPrint('Saved: $fileName');
           count++;
         } else {
           for (final order in scanOrders) {
@@ -73,13 +74,13 @@ void main() {
             final encoded = image_lib.encodePng(processed!);
             final fileName = '${kernel.name}_${order.name}.png';
             File('${outputDir.path}/$fileName').writeAsBytesSync(encoded);
-            print('Saved: $fileName');
+            debugPrint('Saved: $fileName');
             count++;
           }
         }
       }
 
-      print('All $count images saved to ${outputDir.path}/');
+      debugPrint('All $count images saved to ${outputDir.path}/');
     },
   );
 }
