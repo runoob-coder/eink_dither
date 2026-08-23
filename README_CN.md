@@ -5,9 +5,10 @@
 热敏打印机、LED / 点阵屏幕等。
 
 [![Pub Version](https://img.shields.io/pub/v/eink_dither.svg)](https://pub.dev/packages/eink_dither)
+[![API Reference](https://img.shields.io/badge/API-Reference-0175C2.svg)](https://pub.dev/documentation/eink_dither/latest/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Flutter Demo](https://img.shields.io/badge/demo-Flutter-brightgreen.svg)](https://runoob-coder.github.io/eink_dither/)
-[![API Reference](https://img.shields.io/badge/API-Reference-0175C2.svg)](https://pub-web.flutter-io.cn/documentation/eink_dither/latest/)
+[![CI](https://github.com/runoob-coder/eink_dither/actions/workflows/deploy_web.yml/badge.svg)](https://github.com/runoob-coder/eink_dither/actions/workflows/deploy_web.yml)
 [![GitHub stars](https://img.shields.io/github/stars/runoob-coder/eink_dither.svg?style=social)](https://github.com/runoob-coder/eink_dither)
 
 Language: [English](README.md) | 中文
