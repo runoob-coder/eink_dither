@@ -111,7 +111,11 @@ final q2 = EInkPaletteQuantizer.of(EInkPalette.spectra6);
 | `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | 像素遍历顺序（仅误差扩散类生效）。         |
 | `intensity`    | `double`          | `1.0`                         | 有序算法的抖动强度；误差扩散算法忽略此值。     |
 | `patternSize`  | `int`             | `1`                           | 缩放有序抖动的阈值单元或误差扩散的块（越大越粗）。 |
-| `maxSize`      | `int`             | `800`                         | 最长边被限制为该值（等比缩放）。          |
+| `maxSize`      | `int?`            | `null`                        | 最长边被限制为该值（等比缩放）。可选。       |
+| `width`        | `int?`            | `null`                        | 目标宽度；高度按比例自动计算。可选。        |
+| `height`       | `int?`            | `null`                        | 目标高度；宽度按比例自动计算。可选。        |
+
+> `maxSize`、`width`、`height` 三者互斥：至多只能设置其中一个。三者都不设置时不进行缩放。
 
 ```dart
 img.Image? process(Uint8List bytes);

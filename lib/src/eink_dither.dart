@@ -155,8 +155,17 @@ class EInkImageProcessor {
     this.scanOrder = DitherScanOrder.raster,
     this.intensity = 1.0,
     this.patternSize = 1,
-    this.maxSize = 800,
-  });
+    this.maxSize,
+    this.width,
+    this.height,
+  }) : assert(
+         (maxSize == null && width == null && height == null) ||
+             (maxSize != null && width == null && height == null) ||
+             (maxSize == null && width != null && height == null) ||
+             (maxSize == null && width == null && height != null),
+         'maxSize, width and height cannot be set at the same time; '
+         'at most one of them may be provided',
+       );
 
   /// Ink palette.
   final EInkPalette palette;
@@ -184,8 +193,17 @@ class EInkImageProcessor {
   /// [patternSize].
   final int patternSize;
 
-  /// Maximum size (limits the longest side).
-  final int maxSize;
+  /// Maximum size, limiting the longest side (keeps aspect ratio).
+  /// Mutually exclusive with [width] and [height].
+  final int? maxSize;
+
+  /// Target width. If [height] is not set, the height is computed to keep the
+  /// aspect ratio. Mutually exclusive with [maxSize] and [height].
+  final int? width;
+
+  /// Target height. If [width] is not set, the width is computed to keep the
+  /// aspect ratio. Mutually exclusive with [maxSize] and [width].
+  final int? height;
 
   /// Processes the image on the current thread: resize -> quantize to fixed palette + dither.
   img.Image? process(Uint8List bytes) {
@@ -193,11 +211,15 @@ class EInkImageProcessor {
     if (decoded == null) return null;
 
     var image = decoded;
-    if (image.width > maxSize || image.height > maxSize) {
-      // Pass only the longest side; img computes the other side proportionally.
-      image = image.width >= image.height
-          ? img.copyResize(image, width: maxSize)
-          : img.copyResize(image, height: maxSize);
+    if (maxSize != null) {
+      if (image.width > maxSize! || image.height > maxSize!) {
+        // Pass only the longest side; img computes the other side proportionally.
+        image = image.width >= image.height
+            ? img.copyResize(image, width: maxSize)
+            : img.copyResize(image, height: maxSize);
+      }
+    } else if (width != null || height != null) {
+      image = img.copyResize(image, width: width, height: height);
     }
 
     return ditherImage(

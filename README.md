@@ -116,7 +116,12 @@ same work inside a `compute` isolate so the UI never blocks.
 | `scanOrder`    | `DitherScanOrder` | `DitherScanOrder.zigzag`      | Pixel-visit order (error-diffusion only).                                 |
 | `intensity`    | `double`          | `1.0`                         | Dither intensity for ordered kernels; ignored by error-diffusion.         |
 | `patternSize`  | `int`             | `1`                           | Scales ordered-dither cells or error-diffusion blocks (larger = coarser). |
-| `maxSize`      | `int`             | `800`                         | Longest edge is capped to this (proportional resize).                     |
+| `maxSize`      | `int?`            | `null`                        | Caps the longest edge to this value (proportional resize). Optional.      |
+| `width`        | `int?`            | `null`                        | Target width; height auto-computed to keep aspect ratio. Optional.        |
+| `height`       | `int?`            | `null`                        | Target height; width auto-computed to keep aspect ratio. Optional.        |
+
+> `maxSize`, `width` and `height` are mutually exclusive: at most one of them may
+> be provided. With none set, no resizing is applied.
 
 ```dart
 img.Image? process(Uint8List bytes);

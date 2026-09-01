@@ -1,3 +1,10 @@
+## 2.2.4
+
+- ✨ **New feature**: `EInkImageProcessor` now accepts optional `width` and `height`
+  parameters for target-size resize. `maxSize`, `width` and `height` are mutually
+  exclusive (at most one may be set), and all three are now optional (`maxSize`
+  default changed from `800` to `null`, so no resize is applied unless one is given).
+
 ## 2.2.3
 
 - ♻️ **Refactor**: dropped the duplicate `dither_image.dart` import alias and referenced
