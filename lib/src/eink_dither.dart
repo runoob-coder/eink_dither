@@ -207,10 +207,20 @@ class EInkImageProcessor {
 
   /// Processes the image on the current thread: resize -> quantize to fixed palette + dither.
   img.Image? process(Uint8List bytes) {
-    final decoded = img.decodeImage(bytes);
-    if (decoded == null) return null;
+    var image = img.decodeImage(bytes);
+    if (image == null) return null;
 
-    var image = decoded;
+    // Transparent pixels would otherwise read as black, so composite them onto
+    // a white background first. Images without an alpha channel (e.g. JPEG)
+    // skip this step entirely.
+    if (image.hasAlpha) {
+      image = img.compositeImage(
+        img.Image(width: image.width, height: image.height)
+          ..clear(img.ColorRgb8(255, 255, 255)),
+        image,
+      );
+    }
+
     if (maxSize != null) {
       if (image.width > maxSize! || image.height > maxSize!) {
         // Pass only the longest side; img computes the other side proportionally.

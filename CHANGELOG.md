@@ -1,3 +1,8 @@
+## 2.2.5
+
+- 🐛 **Bug fix**: transparent pixels are now composited onto a white
+  background before dithering, so they no longer read as black.
+
 ## 2.2.4
 
 - ✨ **New feature**: `EInkImageProcessor` now accepts optional `width` and `height`
