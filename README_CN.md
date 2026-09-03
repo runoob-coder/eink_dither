@@ -6,6 +6,7 @@
 
 [![Pub Version](https://img.shields.io/pub/v/eink_dither.svg)](https://pub.dev/packages/eink_dither)
 [![API Reference](https://img.shields.io/badge/API-Reference-0175C2.svg)](https://pub.dev/documentation/eink_dither/latest/)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/runoob-coder/eink_dither)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Flutter Demo](https://img.shields.io/badge/demo-Flutter-brightgreen.svg)](https://runoob-coder.github.io/eink_dither/)
 [![CI](https://github.com/runoob-coder/eink_dither/actions/workflows/deploy_web.yml/badge.svg)](https://github.com/runoob-coder/eink_dither/actions/workflows/deploy_web.yml)

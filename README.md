@@ -7,9 +7,10 @@ while minimizing banding and contour artifacts. Typical use cases include
 
 [![Pub Version](https://img.shields.io/pub/v/eink_dither.svg)](https://pub.dev/packages/eink_dither)
 [![API Reference](https://img.shields.io/badge/API-Reference-0175C2.svg)](https://pub.dev/documentation/eink_dither/latest/)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/runoob-coder/eink_dither)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Flutter Demo](https://img.shields.io/badge/demo-Flutter-brightgreen.svg)](https://runoob-coder.github.io/eink_dither/)
-[![CI](https://github.com/runoob-coder/eink_dither/actions/workflows/deploy_web.yml/badge.svg)](https://github.com/runoob-coder/eink_dither/actions/workflows/deploy_web.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/runoob-coder/eink_dither/deploy_web.yml?label=CI)](https://github.com/runoob-coder/eink_dither/actions/workflows/deploy_web.yml)
 [![GitHub stars](https://img.shields.io/github/stars/runoob-coder/eink_dither.svg?style=social)](https://github.com/runoob-coder/eink_dither)
 
 Language: English | [中文](https://github.com/runoob-coder/eink_dither/blob/main/README_CN.md)
