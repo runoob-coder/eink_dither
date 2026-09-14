@@ -37,19 +37,6 @@ screenshots:
   - description: "Ordered dithering — blue-noise (void-and-cluster) mask"
     path: result/blueNoise.png
 
-include:
-  - pubspec.yaml
-  - CHANGELOG.md
-  - LICENSE
-  - README.md
-  - README_CN.md
-  - analysis_options.yaml
-  - assets/
-  - lib/
-  - test/
-  - example/lib/
-  - result/
-
 platforms:
   android:
   ios:
