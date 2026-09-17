@@ -226,29 +226,6 @@ final out = ditherImage(
 );
 ```
 
-## ℹ️ Additional information
-
-- **Repository**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
-- **Issue tracker**:
-  [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
-- **Example app**: The `example/` directory contains a Flutter demo that lets you pick an image and
-  tweak palette, kernel, scan order, intensity, and pattern size live.
-- **Contributions**: Pull requests and issues are welcome!
-
-## 💛 Support
-
-If `eink_dither` helps you build better UIs, please consider supporting it.  
-It only takes a few seconds and helps other Flutter developers discover the library.
-
-- ⭐ [Star on GitHub](https://github.com/runoob-coder/eink_dither)
-- 👍 [Like on pub.dev](https://pub.dev/packages/eink_dither)
-
-## ☕️ Buy Me a Coffee
-
-<a href="https://ko-fi.com/noob_coder" target="_blank">
-  <img src="https://storage.ko-fi.com/cdn/kofi6.png" alt="Buy Me a Coffee at ko-fi.com" />
-</a>
-
 ## 🙏 Acknowledgments
 
 This package stands on the shoulders of the researchers who pioneered digital dithering and
@@ -270,3 +247,27 @@ halftoning. We gratefully acknowledge their foundational contributions:
   *Digital Halftoning*, who formalized blue-noise dithering and
   the [void-and-cluster](https://cv.ulichney.com/papers/1993-void-cluster.pdf) mask generation
   method.
+
+## ℹ️ Additional information
+
+- **Repository**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
+- **Issue tracker**:
+  [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
+- **Example app**: The `example/` directory contains a Flutter demo that lets you pick an image and
+  tweak palette, kernel, scan order, intensity, and pattern size live.
+- **Contributions**: Pull requests and issues are welcome!
+
+## 💛 Support
+
+If `eink_dither` helps you build better UIs, please consider supporting it.  
+It only takes a few seconds and helps other Flutter developers discover the library.
+
+- ⭐ [Star on GitHub](https://github.com/runoob-coder/eink_dither)
+- 👍 [Like on pub.dev](https://pub.dev/packages/eink_dither)
+
+## [☕️ Buy Me a Coffee](https://www.noob-coder.com/buy-me-a-coffee)
+
+|                                                                                   Buy Me a Coffee                                                                                   |                                                                                    Donate with PayPal                                                                                     |
+|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| <a href="https://ko-fi.com/noob_coder" target="_blank"><img src="https://github.com/runoob-coder/runoob-coder/raw/main/public/kofi6.webp" alt="Buy Me a Coffee at ko-fi.com" /></a> | <a href="https://paypal.me/runoobcoder" target="_blank"><img src="https://github.com/runoob-coder/runoob-coder/raw/main/public/paypal-donate-button.avif" alt="Donate with PayPal" /></a> |
+

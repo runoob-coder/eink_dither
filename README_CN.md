@@ -217,28 +217,6 @@ final out = ditherImage(
 );
 ```
 
-## ℹ️ 更多信息
-
-- **仓库**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
-- **问题反馈**:
-  [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
-- **示例应用**: `example/` 目录包含一个 Flutter 演示程序，可选择图像并实时调节调色板、抖动算法、
-  扫描顺序、强度与图案尺寸。
-- **贡献**: 欢迎提交 Pull Request 和 Issue！
-
-## 💛 支持
-
-如果 `eink_dither` 帮助了你，请考虑支持它，只需几秒即可帮助更多 Flutter 开发者发现此库。
-
-- ⭐ [GitHub 上点星](https://github.com/runoob-coder/eink_dither)
-- 👍 [pub.dev 上点赞](https://pub.dev/packages/eink_dither)
-
-## ☕️ 请我喝咖啡
-
-<a href="https://ko-fi.com/noob_coder" target="_blank">
-  <img src="https://storage.ko-fi.com/cdn/kofi6.png" alt="Buy Me a Coffee at ko-fi.com" />
-</a>
-
 ## 🙏 致谢
 
 本库建立在图像数字抖动（dithering）与半调（halftoning）领域先驱者的研究之上。我们由衷感谢他们的奠基性贡献：
@@ -256,3 +234,26 @@ final out = ditherImage(
 - **蓝噪声 / void-and-cluster** —— [Robert A. Ulichney](https://cv.ulichney.com/)（1987、1993），
   *Digital Halftoning*， 确立了蓝噪声抖动及
   [void-and-cluster](https://cv.ulichney.com/papers/1993-void-cluster.pdf) 掩码生成方法。
+
+## ℹ️ 更多信息
+
+- **仓库**: [github.com/runoob-coder/eink_dither](https://github.com/runoob-coder/eink_dither)
+- **问题反馈**:
+  [github.com/runoob-coder/eink_dither/issues](https://github.com/runoob-coder/eink_dither/issues)
+- **示例应用**: `example/` 目录包含一个 Flutter 演示程序，可选择图像并实时调节调色板、抖动算法、
+  扫描顺序、强度与图案尺寸。
+- **贡献**: 欢迎提交 Pull Request 和 Issue！
+
+## 💛 支持
+
+如果 `eink_dither` 帮助了你，请考虑支持它，只需几秒即可帮助更多 Flutter 开发者发现此库。
+
+- ⭐ [GitHub 上点星](https://github.com/runoob-coder/eink_dither)
+- 👍 [pub.dev 上点赞](https://pub.dev/packages/eink_dither)
+
+## [☕️ 请我喝奶茶](https://www.noob-coder.com/buy-me-a-coffee)
+
+|                                            赞赏码     WeChat                                             |                                          支付宝     Alipay                                           |
+|:-----------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------:|
+| ![赞赏码WeChat](https://raw.githubusercontent.com/runoob-coder/runoob-coder/main/public/appreciate.avif) | ![支付宝Alipay](https://raw.githubusercontent.com/runoob-coder/runoob-coder/main/public/alipay.avif) |
+
